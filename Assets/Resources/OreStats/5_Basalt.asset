@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea3221fd696bfc4587bef56008c933c, type: 3}
+  m_Name: 5_Basalt
+  m_EditorClassIdentifier: 
+  armor: 10
+  durability: 200
+  sprites:
+  - {fileID: 21300000, guid: fdd37aec45ee28a44a99ec47225cea9b, type: 3}
+  - {fileID: 21300000, guid: fa2d2eba73c55e84da4d9281efbc683d, type: 3}
+  - {fileID: 21300000, guid: 3243e0404cceef348bb18f1631dd29e2, type: 3}
+  - {fileID: 21300000, guid: 73575252a4465c542bfc8c2dcd445308, type: 3}
+  - {fileID: 21300000, guid: e15e014cf1871c6418b4d3e660828577, type: 3}
+  - {fileID: 21300000, guid: 1a5ee73777d723045b7aade3a2c70cfe, type: 3}

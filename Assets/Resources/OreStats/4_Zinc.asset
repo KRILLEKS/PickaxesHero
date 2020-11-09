@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea3221fd696bfc4587bef56008c933c, type: 3}
+  m_Name: 4_Zinc
+  m_EditorClassIdentifier: 
+  armor: 10
+  durability: 200
+  sprites:
+  - {fileID: 21300000, guid: 28ff2fbb7de6e484e8dee46a1e854ef9, type: 3}
+  - {fileID: 21300000, guid: 647d5746fff81a644884534ad94f229c, type: 3}
+  - {fileID: 21300000, guid: e39a8792bfc931d4a90ae935abf1a028, type: 3}
+  - {fileID: 21300000, guid: d4f99b602877b3a48a496ebbda03f8a8, type: 3}
+  - {fileID: 21300000, guid: aec1dc6745fe27e4e9efd038bcdf7930, type: 3}
+  - {fileID: 21300000, guid: 92caeed41c0c9204581bfa7b2e6543ac, type: 3}
