@@ -1,32 +1,53 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using TMPro;
 
 public class UpdateOresInfo : MonoBehaviour
 {
+  [SerializeField]
+  private GameObject bigPanelContent;
+  [SerializeField]
+  private GameObject listPanelContent;
+
   // global variables
-  private ExtractedOresCounter extractedOresCounter;
+  private SingleExtractedOresCounter extractedOresCounter;
 
   // local variables
-  private TextMeshProUGUI[] values;
+  private TextMeshProUGUI[] bigPanelValues;
+  private TextMeshProUGUI[] listPanelValues;
 
   private void Awake()
   {
-    extractedOresCounter = FindObjectOfType<ExtractedOresCounter>();
+    extractedOresCounter = FindObjectOfType<SingleExtractedOresCounter>();
+    int oresAmount = bigPanelContent.transform.childCount;
 
-    // gameObject == content
-    int children = gameObject.transform.childCount;
-    values = new TextMeshProUGUI[children];
+    SetListPanelArray();
+    SetBigPanelArray();
 
-    for (int i = 0; i < children; i++)
-      values[i] = gameObject.transform.GetChild(i).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+    void SetListPanelArray()
+    {
+      listPanelValues = new TextMeshProUGUI[oresAmount];
+      int iterator = 0;
+
+      for (int i = 0; i < listPanelContent.transform.childCount; i++)
+        for (int j = 0; j < listPanelContent.transform.GetChild(i).childCount; j++)
+          listPanelValues[iterator++] = listPanelContent.transform.GetChild(i).GetChild(j).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+    }
+    void SetBigPanelArray()
+    {
+      // gameObject == content
+      bigPanelValues = new TextMeshProUGUI[oresAmount];
+
+      for (int i = 0; i < oresAmount; i++)
+        bigPanelValues[i] = bigPanelContent.transform.GetChild(i).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+    }
   }
 
   public void SetValues()
   {
-    for (int i = 0; i < values.Length; i++)
-      values[i].text = extractedOresCounter.ores[i].ToString();
+    for (int i = 0; i < bigPanelValues.Length; i++)
+      bigPanelValues[i].text = extractedOresCounter.ores[i].ToString();
+
+    for (int i = 0; i < listPanelValues.Length; i++)
+      listPanelValues[i].text = extractedOresCounter.ores[i].ToString();
   }
 }

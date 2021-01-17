@@ -49,6 +49,12 @@
       "name": "SwitchPlayer",
       "type": "unity",
       "request": "launch"
+    },
+    {
+      "type": "pwa-chrome",
+      "name": "file:///d%3A/GitHub/PickaxesHero/Assets/Scripts/Mine/ChancesGenerator.cs",
+      "request": "launch",
+      "url": "file:///d%3A/GitHub/PickaxesHero/Assets/Scripts/Mine/ChancesGenerator.cs"
     }
   ]
 }

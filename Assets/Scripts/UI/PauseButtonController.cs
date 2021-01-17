@@ -1,22 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PauseButtonController : MonoBehaviour
 {
   [SerializeField]
   private GameObject pausePanel;
+  [SerializeField]
+  private GameObject pauseButton;
 
-  // local variables
-  bool isPauseMenuActive = false;
-
-  public void SwitchPauseMenu()
+  public void SwitchDisplay()
   {
-    if (!isPauseMenuActive)
-      pausePanel.SetActive(true);
-    else
-      pausePanel.SetActive(false);
+    Switch(pausePanel);
+    Switch(pauseButton);
 
-    isPauseMenuActive = !isPauseMenuActive;
+    void Switch(GameObject objectToSwitch)
+    {
+      if (!objectToSwitch.activeSelf)
+        objectToSwitch.SetActive(true);
+      else
+        objectToSwitch.SetActive(false);
+    }
   }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DataController : MonoBehaviour
 {
@@ -10,7 +8,7 @@ public class DataController : MonoBehaviour
   private GridBehavior gridBehavior;
   private DescentToTheNextLevel descentToTheNextLevel;
   private ProgressBar progressBar;
-  private ExtractedOresCounter extractedOresCounter;
+  private SingleExtractedOresCounter extractedOresCounter;
 
   private void Awake()
   {
@@ -20,7 +18,7 @@ public class DataController : MonoBehaviour
     oreGenerator = FindObjectOfType<OreGenerator>();
     descentToTheNextLevel = FindObjectOfType<DescentToTheNextLevel>();
     progressBar = FindObjectOfType<ProgressBar>();
-    extractedOresCounter = FindObjectOfType<ExtractedOresCounter>();
+    extractedOresCounter = FindObjectOfType<SingleExtractedOresCounter>();
   }
 
   public void Save()

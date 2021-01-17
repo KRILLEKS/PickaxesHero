@@ -1,94 +1,102 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Tilemaps;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField]
-    private float speed = 1f;
-    [Space]
-    public UnityEvent atStop;
-    [Space]
-    public UnityEvent whenMovementResumes;
+  [SerializeField]
+  private float speed = 1f;
+  [Space]
+  public UnityEvent atStop;
+  [Space]
+  public UnityEvent whenMovementResumes;
 
-    // global variables
-    private GridBehavior gridBehavior;
-    private List<GameObject> path = new List<GameObject>();
-    private CsGlobal csGlobal;
-    private Rigidbody2D rigidBody;
+  // global variables
+  private GridBehavior gridBehavior;
+  private List<GameObject> path = new List<GameObject>();
+  private CsGlobal csGlobal;
+  private Rigidbody2D rigidBody;
+  private ChracterAnimatorController animatorController;
 
-    //local variables
-    private Vector3 movePosition = new Vector3(0, 0, 0);
-    private int index;
-    private bool isStanding = true;
+  //local variables
+  private Vector3 movePosition = new Vector3(0, 0, 0);
+  private int index;
+  private bool isStanding = true;
 
-    private void Awake()
+  private void Awake()
+  {
+    gridBehavior = FindObjectOfType<GridBehavior>();
+    csGlobal = FindObjectOfType<CsGlobal>();
+    rigidBody = gameObject.GetComponent<Rigidbody2D>();
+    animatorController = FindObjectOfType<ChracterAnimatorController>();
+
+    if (atStop == null)
+      new UnityEvent();
+
+    if (whenMovementResumes == null)
+      new UnityEvent();
+  }
+
+  private void FixedUpdate()
+  {
+    MovementController();
+  }
+
+  // Move our character and Invokes atStop and whenMovementResumes Events
+  private void MovementController()
+  {
+    if (path != null && index < path.Count)
     {
-        gridBehavior = FindObjectOfType<GridBehavior>();
-        csGlobal = FindObjectOfType<CsGlobal>();
-        rigidBody = gameObject.GetComponent<Rigidbody2D>();
+      if (isStanding)
+        whenMovementResumes.Invoke();
 
-        if (atStop == null)
-            new UnityEvent();
+      isStanding = false;
 
-        if (whenMovementResumes == null)
-            new UnityEvent();
+      Move();
+    }
+    else if (!isStanding)
+    {
+      isStanding = true;
+      atStop.Invoke();
     }
 
-    private void FixedUpdate()
+    // Move our character
+    void Move()
     {
-        MovementController();
+      if (transform.position + new Vector3(0, 0, -10) != path[index].transform.position)
+      {
+        rigidBody.MovePosition(Vector2.MoveTowards(transform.position, path[index].transform.position, Time.fixedDeltaTime * speed));
+      }
+      else
+      {
+        index++;
+        if (index < path.Count)
+          animatorController.SetValues(path[index].transform.position);
+      }
     }
+  }
 
-    // Move our character and Invokes atStop and whenMovementResumes Events
-    private void MovementController()
+  // it calls by onTouch event in CsGlobal and sets all values
+  public void InitialSetUp()
+  {
+    movePosition = csGlobal.g_mousePosition; // sets end position
+
+    if (isStanding && gridBehavior.CanAchive(movePosition)) // executes when player is satnding
+      setPath(transform.position);
+    else if (gridBehavior.CanAchive(movePosition)) // executes when player is moving
+      setPath(path[index].transform.position);
+
+    // sets path and reset index
+    void setPath(Vector3 startPosition)
     {
-        if (path != null && index < path.Count)
-        {
-            isStanding = false;
-            whenMovementResumes.Invoke();
+      gridBehavior.SetPosition(startPosition, true); // sets start position
+      gridBehavior.SetPosition(movePosition, false); // sets end position
+      gridBehavior.SetDistance();
+      gridBehavior.SetPath();
 
-            Move();
-        }
-        else if (!isStanding)
-        {
-            isStanding = true;
-            atStop.Invoke();
-        }
-
-        // Move our character
-        void Move()
-        {
-            if (transform.position + new Vector3(0, 0, -10) != path[index].transform.position)
-                rigidBody.MovePosition(Vector2.MoveTowards(transform.position, path[index].transform.position, Time.fixedDeltaTime * speed));
-            else
-                index++;
-        }
+      path = gridBehavior.g_path;
+      index = 0;
     }
-
-    // it calls by onTouch event in CsGlobal and sets all values
-    public void InitialSetUp()
-    {
-        movePosition = csGlobal.g_mousePosition; // sets end position
-
-        if (isStanding && gridBehavior.CanAchive(movePosition)) // executes when player is satnding
-            setPath(transform.position);
-        else if (gridBehavior.CanAchive(movePosition)) // executes when player is moving
-            setPath(path[index].transform.position);
-
-        // sets path and reset index
-        void setPath(Vector3 startPosition)
-        {
-            gridBehavior.SetPosition(startPosition, true); // sets start position
-            gridBehavior.SetPosition(movePosition, false); // sets end position
-            gridBehavior.SetDistance();
-            gridBehavior.SetPath();
-
-            path = gridBehavior.g_path;
-            index = 0;
-        }
-    }
+  }
 
 }

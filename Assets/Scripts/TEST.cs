@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TEST : MonoBehaviour
 {
@@ -28,7 +26,6 @@ public class TEST : MonoBehaviour
     if (turnLightOn)
       SwithLight();
   }
-
   private void LoadLevel()
   {
     descentToTheNextLevel = FindObjectOfType<DescentToTheNextLevel>();
@@ -55,5 +52,6 @@ public class TEST : MonoBehaviour
     else
       globalLight.SetActive(false);
   }
+
 }
 

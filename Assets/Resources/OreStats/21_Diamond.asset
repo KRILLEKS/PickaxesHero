@@ -14,4 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armor: 15
   durability: 1100
-  sprite: {fileID: 21300038, guid: 95d22684aba5646d79a26b3287a692b6, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: b0399d8e3eaeb3a42bc568253f84bc19, type: 3}
+  - {fileID: 21300000, guid: 92b9070a704996541be53c6d21f62edb, type: 3}
+  - {fileID: 21300000, guid: aff831bb6693ef2448a52073a5df8b17, type: 3}
+  - {fileID: 21300000, guid: ace41206d0179a34cb5ab37c9d225db5, type: 3}
+  - {fileID: 21300000, guid: 623b8722924137a44989a5401d0134b9, type: 3}
+  - {fileID: 21300000, guid: 38069d4e7cdd98344adbe32bb4f54e62, type: 3}

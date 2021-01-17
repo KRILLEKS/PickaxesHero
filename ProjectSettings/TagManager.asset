@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ore
   - Descent
+  - Shop
   layers:
   - Default
   - TransparentFX

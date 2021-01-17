@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class SwipeMenu : MonoBehaviour
 {
+  [SerializeField]
+  private bool changeElementsSize = true;
   [SerializeField]
   private float transitionLerpTime = 0.01f;
   [SerializeField]
   private float increaseSizeLerpTime = 0.01f;
   [SerializeField]
-  private float decreaseSizeLerptime = 0.01f;
+  private float decreaseSizeLerpTime = 0.01f;
   [SerializeField]
   private Vector2 CentralElementSize = new Vector2(10f, 10f);
   [SerializeField]
@@ -43,12 +44,13 @@ public class SwipeMenu : MonoBehaviour
 
   void Update()
   {
-    if (csGlobal.isClicking())
-      scrollPosition = scrollbar.GetComponent<Scrollbar>().value;
-    else
+    scrollPosition = scrollbar.GetComponent<Scrollbar>().value;
+
+    if (!csGlobal.isClicking())
       ScrollToNearest();
 
-    ChangeElementsSize();
+    if (changeElementsSize)
+      ChangeElementsSize();
 
     void ScrollToNearest()
     {
@@ -61,11 +63,6 @@ public class SwipeMenu : MonoBehaviour
       for (int i = 0; i < pos.Length; i++)
         if (pos[i] < scrollPosition + (distance / 2) && pos[i] > scrollPosition - (distance / 2))
           IncreaseCentralElementSize(i);
-        else if (pos[0] > scrollPosition + distance / 2)
-          IncreaseCentralElementSize(0);
-        else if (pos[pos.Length - 1] < scrollPosition - distance / 2)
-          IncreaseCentralElementSize(pos.Length - 1);
-
         else // if u over slide on right or on left without if elements size will decrease same with if second condition
           DecreaseOtherElementsSize(i);
 
@@ -74,7 +71,7 @@ public class SwipeMenu : MonoBehaviour
       {
         for (int i = 0; i < pos.Length; i++)
           if (index != i)
-            transform.GetChild(i).localScale = Vector2.Lerp(transform.GetChild(i).localScale, OtherElementsSize, decreaseSizeLerptime * Time.fixedDeltaTime);
+            transform.GetChild(i).localScale = Vector2.Lerp(transform.GetChild(i).localScale, OtherElementsSize, decreaseSizeLerpTime * Time.fixedDeltaTime);
       }
       void IncreaseCentralElementSize(int index) =>
       transform.GetChild(index).localScale = Vector2.Lerp(transform.GetChild(index).localScale, CentralElementSize, increaseSizeLerpTime * Time.fixedDeltaTime);
