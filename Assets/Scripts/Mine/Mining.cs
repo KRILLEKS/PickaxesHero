@@ -8,7 +8,7 @@ public class Mining : MonoBehaviour
 
   // global variables
   private CsGlobal csGlobal;
-  private GridBehavior gridBehavior;
+  private GridBehavior _gridBehavior;
   private ChracterAnimatorController animatorController;
 
   // local variables
@@ -19,7 +19,7 @@ public class Mining : MonoBehaviour
   private void Awake()
   {
     csGlobal = FindObjectOfType<CsGlobal>();
-    gridBehavior = FindObjectOfType<GridBehavior>();
+    _gridBehavior = FindObjectOfType<GridBehavior>();
     animatorController = FindObjectOfType<ChracterAnimatorController>();
   }
 
@@ -31,7 +31,7 @@ public class Mining : MonoBehaviour
     blockPosition = csGlobal.g_mousePosition;
     Collider2D hitInfo = Physics2D.OverlapPoint(blockPosition);
 
-    if (hitInfo && hitInfo.tag == "Ore" && gridBehavior.CanAchive(blockPosition))
+    if (hitInfo && hitInfo.tag == "Ore" && _gridBehavior.CanAchive(blockPosition))
       block = hitInfo.GetComponent<OreDurability>();
     else
       block = null;

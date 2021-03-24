@@ -5,7 +5,7 @@ using System.Reflection;
 
 public class ChracterAnimatorController : MonoBehaviour
 {
-  // private varuables
+  // private variables
   private Animator animator;
 
   private void Awake()

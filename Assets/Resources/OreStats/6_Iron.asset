@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea3221fd696bfc4587bef56008c933c, type: 3}
   m_Name: 6_Iron
   m_EditorClassIdentifier: 
-  armor: 10
+  armor: 20
   durability: 450
   sprites:
   - {fileID: 21300000, guid: fc139faccfbc6384397dcda0e2060f12, type: 3}

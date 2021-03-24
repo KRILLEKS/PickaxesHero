@@ -45,9 +45,9 @@ public class UpdateOresInfo : MonoBehaviour
   public void SetValues()
   {
     for (int i = 0; i < bigPanelValues.Length; i++)
-      bigPanelValues[i].text = extractedOresCounter.ores[i].ToString();
+      bigPanelValues[i].text = SingleExtractedOresCounter.ores[i].ToString();
 
     for (int i = 0; i < listPanelValues.Length; i++)
-      listPanelValues[i].text = extractedOresCounter.ores[i].ToString();
+      listPanelValues[i].text = SingleExtractedOresCounter.ores[i].ToString();
   }
 }

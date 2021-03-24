@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea3221fd696bfc4587bef56008c933c, type: 3}
+  m_Name: 14_Cobald
+  m_EditorClassIdentifier: 
+  armor: 185
+  durability: 4000
+  sprites:
+  - {fileID: 21300000, guid: c7c9e2bdfff02e840a48de872b18a43e, type: 3}
+  - {fileID: 21300000, guid: 578489ee00eaefa46893ddb8cd969935, type: 3}
+  - {fileID: 21300000, guid: 9c8470eb8e1b0b745b9c10fe74abd658, type: 3}
+  - {fileID: 21300000, guid: cb87c52b23b9cff449fd04e15f216603, type: 3}
+  - {fileID: 21300000, guid: 5efe205070ca4ac4792075972b45b535, type: 3}
+  - {fileID: 21300000, guid: 2d04fa2927861a448ae4f24d400e7af4, type: 3}

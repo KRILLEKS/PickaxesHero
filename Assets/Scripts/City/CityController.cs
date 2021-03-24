@@ -17,9 +17,9 @@ public class CityController : MonoBehaviour
   public void CheckTarget()
   {
     Collider2D hitInfo = Physics2D.OverlapPoint(FindObjectOfType<CsGlobal>().g_mousePosition);
-    if (hitInfo && hitInfo.tag == "Descent")
+    if (hitInfo && hitInfo.CompareTag("Descent"))
       needsToLoadMine = true;
-    if (hitInfo && hitInfo.tag == "Shop")
+    if (hitInfo && hitInfo.CompareTag("Shop"))
       needsToOpenShopMenu = true;
   }
 

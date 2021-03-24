@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea3221fd696bfc4587bef56008c933c, type: 3}
+  m_Name: 22_Dragonite
+  m_EditorClassIdentifier: 
+  armor: 950
+  durability: 60000
+  sprites:
+  - {fileID: 21300000, guid: f17f10b91043ee648ab68cd451c49316, type: 3}
+  - {fileID: 21300000, guid: 92d14e5729520114ba4de51d1bbdbc6a, type: 3}
+  - {fileID: 21300000, guid: bcb2f067e304f784b9520117c97ebc06, type: 3}
+  - {fileID: 21300000, guid: 6befc06dfdb322747840a9d16c1254a3, type: 3}
+  - {fileID: 21300000, guid: 6b75a9e797f92114695a704183f4340f, type: 3}
+  - {fileID: 21300000, guid: 2aac3fb53154f5840b20219a50c0f3d7, type: 3}

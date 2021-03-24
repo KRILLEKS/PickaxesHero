@@ -1,0 +1,290 @@
+Using pre-set license
+Built from '2020.2/staging' branch; Version is '2020.2.3f1 (8ff31bc5bf5b) revision 9433883'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Enterprise 2016 LTSB; OS build 14393.4283; Version 1607; 64bit' Language: 'en' Physical Memory: 16308 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+F:\Unity\2020.2.3f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/GitHub/PickaxesHero
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+49939
+Successfully changed project path to: D:/GitHub/PickaxesHero
+D:/GitHub/PickaxesHero
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 67.97 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.2.3f1 (8ff31bc5bf5b)
+[Subsystems] Discovering subsystems at path F:/Unity/2020.2.3f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/GitHub/PickaxesHero/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1070 (ID=0x1b81)
+    Vendor:   
+    VRAM:     8092 MB
+    Driver:   27.21.14.6172
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Initialize mono
+Mono path[0] = 'F:/Unity/2020.2.3f1/Editor/Data/Managed'
+Mono path[1] = 'F:/Unity/2020.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'F:/Unity/2020.2.3f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56068
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: F:/Unity/2020.2.3f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 1.454826 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 54.74 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.746 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.004723 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 57.70 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.884 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 0.67 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3152 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 142.2 MB.
+System memory in use after: 142.4 MB.
+
+Unloading 47 unused Assets to reduce memory usage. Loaded Objects now: 3599.
+Total: 2.033595 ms (FindLiveObjects: 0.250182 ms CreateObjectMapping: 0.125230 ms MarkObjects: 1.585871 ms  DeleteObjects: 0.071481 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Editor/CSVs/hat.csv
+  artifactKey: Guid(ac0db75b434c3da4bb6b925c6ec9eb60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/hat.csv using Guid(ac0db75b434c3da4bb6b925c6ec9eb60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '925e37bff692e341612ad46e26937344') in 0.029064 seconds
+  Import took 0.033045 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 16.530288 seconds.
+  path: Assets/Editor/CSVs/sticks.csv
+  artifactKey: Guid(8e2b0fc42551d5944b5a3b3075e61e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/sticks.csv using Guid(8e2b0fc42551d5944b5a3b3075e61e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b66feb5e63e9b973fe901070ec4885b') in 0.028981 seconds
+  Import took 0.033214 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 87.002638 seconds.
+  path: Assets/Editor/CSVs/hatCSV.csv
+  artifactKey: Guid(ac0db75b434c3da4bb6b925c6ec9eb60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/hatCSV.csv using Guid(ac0db75b434c3da4bb6b925c6ec9eb60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '54a06226511887917e28a0d68d93728e') in 0.003056 seconds
+  Import took 0.007343 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.811419 seconds.
+  path: Assets/Editor/CSVs/pickaxe headCSV.csv
+  artifactKey: Guid(2ca1ba2b17a2fd84e9cca1a98eee9b13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/pickaxe headCSV.csv using Guid(2ca1ba2b17a2fd84e9cca1a98eee9b13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '527f37619df53f5f56a38b3ac39fa0b4') in 0.002948 seconds
+  Import took 0.006928 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.999595 seconds.
+  path: Assets/Editor/CSVs/sticksCSV.csv
+  artifactKey: Guid(8e2b0fc42551d5944b5a3b3075e61e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/sticksCSV.csv using Guid(8e2b0fc42551d5944b5a3b3075e61e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f015917921dc351c1808d5f3d60769e7') in 0.003517 seconds
+  Import took 0.007667 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 52.349181 seconds.
+  path: Assets/Editor/CSVtoSO.cs
+  artifactKey: Guid(f477610ff3a0a284ab515378f7c95417) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVtoSO.cs using Guid(f477610ff3a0a284ab515378f7c95417) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0815ad7732768009ff47e18957daf768') in 0.010786 seconds
+  Import took 0.015019 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 54.725690 seconds.
+  path: Assets/Editor/CSVtoSO.cs
+  artifactKey: Guid(f477610ff3a0a284ab515378f7c95417) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVtoSO.cs using Guid(f477610ff3a0a284ab515378f7c95417) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a6a7a5bd7230cab55a6390407c965ce1') in 0.002540 seconds
+  Import took 0.007678 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 103.938442 seconds.
+  path: Assets/Editor/CSVs/pickaxeHeadCSV.csv
+  artifactKey: Guid(2ca1ba2b17a2fd84e9cca1a98eee9b13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/pickaxeHeadCSV.csv using Guid(2ca1ba2b17a2fd84e9cca1a98eee9b13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f0f4afd8b399a4dd035189ac022bf3d') in 0.003375 seconds
+  Import took 0.025205 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1221.000752 seconds.
+  path: Assets/Editor/CSVtoSO.cs
+  artifactKey: Guid(f477610ff3a0a284ab515378f7c95417) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVtoSO.cs using Guid(f477610ff3a0a284ab515378f7c95417) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '395e4ecb708ff5e3fb9a0168a38c84f6') in 0.517174 seconds
+  Import took 0.522370 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 21.073753 seconds.
+  path: Assets/Editor/CSVtoSO.cs
+  artifactKey: Guid(f477610ff3a0a284ab515378f7c95417) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVtoSO.cs using Guid(f477610ff3a0a284ab515378f7c95417) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1a0d8e9d0625d03900ce3db332818b6') in 0.020859 seconds
+  Import took 0.025367 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.259627 seconds.
+  path: Assets/Editor/CSVtoSO.cs
+  artifactKey: Guid(f477610ff3a0a284ab515378f7c95417) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVtoSO.cs using Guid(f477610ff3a0a284ab515378f7c95417) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1a0d8e9d0625d03900ce3db332818b6') in 0.002158 seconds
+  Import took 0.006797 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 156.769951 seconds.
+  path: Assets/Resources/Upgrades/hat
+  artifactKey: Guid(3583503a252231e4d98be2d2bde910f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Upgrades/hat using Guid(3583503a252231e4d98be2d2bde910f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '79d5b940d168efc47b028a564bb45ff1') in 0.002513 seconds
+  Import took 0.031939 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.103360 seconds.
+  path: Assets/Resources/Upgrades/stick
+  artifactKey: Guid(0cfbe01fc9ad20c4cac575c66c36fa27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Upgrades/stick using Guid(0cfbe01fc9ad20c4cac575c66c36fa27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e028e8c204ad6f0892572a68d1495ff') in 0.002548 seconds
+  Import took 0.007000 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.285720 seconds.
+  path: Assets/Resources/Upgrades/pickaxeHead
+  artifactKey: Guid(2d0b79e5acc62384187cb0cb47f68496) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Upgrades/pickaxeHead using Guid(2d0b79e5acc62384187cb0cb47f68496) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3babe1f8fac6c3621b8f04241602632') in 0.002558 seconds
+  Import took 0.007118 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.216051 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.95 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.925 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395204) extendedPlatform(0)
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.71 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3021 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 132.3 MB.
+System memory in use after: 132.5 MB.
+
+Unloading 36 unused Assets to reduce memory usage. Loaded Objects now: 3601.
+Total: 2.164920 ms (FindLiveObjects: 0.261541 ms CreateObjectMapping: 0.127446 ms MarkObjects: 1.753491 ms  DeleteObjects: 0.021056 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 560.137775 seconds.
+  path: Assets/Editor/CSVs/hatCSV.csv
+  artifactKey: Guid(ac0db75b434c3da4bb6b925c6ec9eb60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/hatCSV.csv using Guid(ac0db75b434c3da4bb6b925c6ec9eb60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a4a05d789a0f26261a4ff6107725abfa') in 0.017255 seconds
+  Import took 0.023636 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 20.335484 seconds.
+  path: Assets/Editor/CSVs/pickaxeHeadCSV.csv
+  artifactKey: Guid(2ca1ba2b17a2fd84e9cca1a98eee9b13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/pickaxeHeadCSV.csv using Guid(2ca1ba2b17a2fd84e9cca1a98eee9b13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d33ca3d7f113db25d5b4e9c2d8b4589') in 0.020112 seconds
+  Import took 0.051145 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.952169 seconds.
+  path: Assets/Editor/CSVs/sticksCSV.csv
+  artifactKey: Guid(8e2b0fc42551d5944b5a3b3075e61e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/sticksCSV.csv using Guid(8e2b0fc42551d5944b5a3b3075e61e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '577e38c26d1365e37e4c884ed0264852') in 0.016083 seconds
+  Import took 0.042359 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 194.237741 seconds.
+  path: Assets/Editor/CSVs/hatCSV.csv
+  artifactKey: Guid(ac0db75b434c3da4bb6b925c6ec9eb60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/hatCSV.csv using Guid(ac0db75b434c3da4bb6b925c6ec9eb60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6c85c4bf8c10b154267d9091e04324b0') in 0.030065 seconds
+  Import took 0.052101 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.555193 seconds.
+  path: Assets/Editor/CSVs/pickaxeHeadCSV.csv
+  artifactKey: Guid(2ca1ba2b17a2fd84e9cca1a98eee9b13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/pickaxeHeadCSV.csv using Guid(2ca1ba2b17a2fd84e9cca1a98eee9b13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '74f24e331bb99ab79b5f77132bdd3f55') in 0.002785 seconds
+  Import took 0.006946 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.459274 seconds.
+  path: Assets/Editor/CSVs/sticksCSV.csv
+  artifactKey: Guid(8e2b0fc42551d5944b5a3b3075e61e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/CSVs/sticksCSV.csv using Guid(8e2b0fc42551d5944b5a3b3075e61e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb090d2bcc5c3804b5eaa103ce7c201f') in 0.023854 seconds
+  Import took 0.028261 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005610 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.67 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.834 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395204) extendedPlatform(0)
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.69 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3021 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 132.3 MB.
+System memory in use after: 132.6 MB.
+
+Unloading 36 unused Assets to reduce memory usage. Loaded Objects now: 3603.
+Total: 1.996192 ms (FindLiveObjects: 0.271792 ms CreateObjectMapping: 0.128554 ms MarkObjects: 1.575066 ms  DeleteObjects: 0.019948 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000

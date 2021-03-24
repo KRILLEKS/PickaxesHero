@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea3221fd696bfc4587bef56008c933c, type: 3}
   m_Name: 5_Basalt
   m_EditorClassIdentifier: 
-  armor: 10
-  durability: 200
+  armor: 15
+  durability: 350
   sprites:
   - {fileID: 21300000, guid: fdd37aec45ee28a44a99ec47225cea9b, type: 3}
   - {fileID: 21300000, guid: fa2d2eba73c55e84da4d9281efbc683d, type: 3}

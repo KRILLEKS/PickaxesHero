@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea3221fd696bfc4587bef56008c933c, type: 3}
   m_Name: 7_Bismuth
   m_EditorClassIdentifier: 
-  armor: 15
-  durability: 400
+  armor: 30
+  durability: 650
   sprites:
   - {fileID: 21300000, guid: d98db98a15da3eb4db393f05e902aad7, type: 3}
   - {fileID: 21300000, guid: f1eafa4f6a141b64a96bfa4692402ead, type: 3}

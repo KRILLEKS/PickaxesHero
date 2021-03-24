@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea3221fd696bfc4587bef56008c933c, type: 3}
   m_Name: 3_Copper
   m_EditorClassIdentifier: 
-  armor: 10
-  durability: 100
+  armor: 8
+  durability: 125
   sprites:
   - {fileID: 21300000, guid: 832dff89b12a3ce45aa0decc74bd4e92, type: 3}
   - {fileID: 21300000, guid: 364f4b584ff952744bce8a1ad857028f, type: 3}

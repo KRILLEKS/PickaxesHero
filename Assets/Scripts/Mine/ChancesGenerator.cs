@@ -114,7 +114,6 @@ public class ChancesGenerator : MonoBehaviour
     {
       for (int j = 0; j < fillerChanceChanges.Count - 1; j++)
       {
-        bool isA = 1 != 0;
         // checks need to move chances or no
         if (previousLevelChances[fillersIndexes[i]] > 0
           && (previousLevelChances[fillersIndexes[i + 1] + fillerChanceChanges.Keys.ElementAt(j)] > 0))

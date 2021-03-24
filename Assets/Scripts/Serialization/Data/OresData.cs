@@ -9,7 +9,7 @@ public class OresData : MonoBehaviour
 
   public OresData(OreGenerator oreGenerator)
   {
-    indexer = oreGenerator.indexer;
+    indexer = oreGenerator.currentLevel;
     randNumbers = oreGenerator.randNumbers;
   }
 }

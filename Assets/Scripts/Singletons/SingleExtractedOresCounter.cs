@@ -1,35 +1,50 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using UnityEngine;
+using System.Linq;
 
 public class SingleExtractedOresCounter : MonoBehaviour
 {
-  // local variables
-  public int[] ores = new int[23]; // all ores
+    [SerializeField] private static float extraOresPercentage = 0.5f;
 
-  // static variables
-  static SingleExtractedOresCounter singleExtractedOresCounter;
+    // local variables
+    public static int[] ores = new int[Constants.oresAmount]; // all ores
 
-  private void Awake()
-  {
-    if (singleExtractedOresCounter != null)
-      Destroy(singleExtractedOresCounter);
-    else
+    private static int[] thisLevelOres = new int[Constants.oresAmount]; // ores that were get on current level
+
+    // static variables
+    static SingleExtractedOresCounter singleExtractedOresCounter;
+
+    private void Awake()
     {
-      singleExtractedOresCounter = this;
-      DontDestroyOnLoad(gameObject);
+        if (singleExtractedOresCounter != null)
+            Destroy(singleExtractedOresCounter);
+        else
+        {
+            singleExtractedOresCounter = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
-  }
 
-  public void GetOre(string oreName)
-  {
-    Regex regex = new Regex(@"^\d*");
-    oreName = regex.Match(oreName).Value; // gets ore number
+    public void GetOre(string oreName)
+    {
+        Regex regex = new Regex(@"^\d*");
+        oreName = regex.Match(oreName).Value; // gets ore number
 
-    int index = int.Parse(oreName) - 1; // gets index
+        int index = int.Parse(oreName) - 1; // gets index
 
-    ores[index]++;
-  }
+        ores[index]++;
+        thisLevelOres[index]++;
+    }
 
-  public void LoadOres(ExtractedOresData extractedOresData) =>
-      ores = extractedOresData.ores;
+    public static void GetExtraOres()
+    {
+        ores = thisLevelOres.Select(i => (int) (i * extraOresPercentage))
+                                    .Zip(ores, (int i, int j) => i + j).ToArray();
+
+        thisLevelOres = thisLevelOres.Select(ore => ore = 0).ToArray();
+    }
+
+    public void LoadOres(ExtractedOresData extractedOresData) =>
+        ores = extractedOresData.ores;
 }

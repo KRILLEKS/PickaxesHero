@@ -5,21 +5,21 @@ public class GenerateLevel : MonoBehaviour
 {
   // global variables
   private GameObject[] levelPrefabs;
-  private GameObject player;
+  public GameObject player;
 
   // local variables
   public int rand;
   private GameObject levelPrefab;
   private Tilemap barrier;
   private Vector3 spawnPoint;
-
+  
   private void Awake()
   {
     levelPrefabs = Resources.LoadAll<GameObject>("LevelPrefabs");
     player = GameObject.FindGameObjectWithTag("Player");
   }
 
-  private void SetPlayerPosition(int rand)
+  private void SetPlayerPosition(int rand = 0)
   {
     spawnPoint = levelPrefabs[rand].transform.GetChild(1).transform.position;
     player.transform.position = spawnPoint;

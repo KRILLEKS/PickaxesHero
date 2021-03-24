@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea3221fd696bfc4587bef56008c933c, type: 3}
   m_Name: 8_Chromite
   m_EditorClassIdentifier: 
-  armor: 15
-  durability: 500
+  armor: 40
+  durability: 900
   sprites:
   - {fileID: 21300000, guid: 760b84ab3a2bd614392f9c6d0b89d47d, type: 3}
   - {fileID: 21300000, guid: d884db620497d26438e1cd7c7f66ced8, type: 3}
