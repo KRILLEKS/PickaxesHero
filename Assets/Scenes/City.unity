@@ -23793,7 +23793,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 475487062}
         m_TargetAssemblyTypeName: PauseButtonController, Assembly-CSharp
-        m_MethodName: SwitchDisplay
+        m_MethodName: ClosePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -28623,7 +28623,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 475487062}
         m_TargetAssemblyTypeName: PauseButtonController, Assembly-CSharp
-        m_MethodName: SwitchDisplay
+        m_MethodName: ClosePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -37593,7 +37593,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1949223203}
         m_TargetAssemblyTypeName: CloseAllMenus, Assembly-CSharp
-        m_MethodName: Close
+        m_MethodName: ClosePanels
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

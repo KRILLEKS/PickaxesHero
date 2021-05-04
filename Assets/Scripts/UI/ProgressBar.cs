@@ -3,84 +3,80 @@ using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
 {
-  [SerializeField]
-  private GameObject progressBar;
-  [SerializeField]
-  private Image progressBarImg;
-  private Slider slider;
-  private Button button;
-  private Image filler;
-  private DescentToTheNextLevel descentToTheNextLevel;
+    private Slider slider;
+    private Button button;
+    private Image filler;
+    private DescentToTheNextLevel descentToTheNextLevel;
 
-  // local variables
-  public int value = 0;
+    // local variables
+    [HideInInspector] public int value = 0;
 
-  private void Awake()
-  {
-    filler = gameObject.GetComponentInChildren<Image>();
-    slider = gameObject.GetComponentInChildren<Slider>();
-    descentToTheNextLevel = FindObjectOfType<DescentToTheNextLevel>();
-    button = gameObject.GetComponentInChildren<Button>();
-  }
-
-  public void LoadProgressBar(ProgressBarData progressBarData)
-  {
-    value = progressBarData.value;
-    slider.value = value;
-
-    if ((value == slider.maxValue || value > slider.maxValue) && descentToTheNextLevel.descentWasSpawned)
+    private void Awake()
     {
-      DisableProgressBar();
-      Reset();
+        filler = gameObject.GetComponentInChildren<Image>();
+        slider = gameObject.GetComponentInChildren<Slider>();
+        descentToTheNextLevel = FindObjectOfType<DescentToTheNextLevel>();
+        button = gameObject.GetComponentInChildren<Button>();
     }
-    else if ((value == slider.maxValue || value > slider.maxValue) && !descentToTheNextLevel.descentWasSpawned)
+
+    public void LoadProgressBar(ProgressBarData progressBarData)
     {
-      EnableProgressBar();
-      ReachedMaxValue();
+        value = progressBarData.value;
+        slider.value = value;
+
+        if ((value == slider.maxValue || value > slider.maxValue) &&
+            descentToTheNextLevel.descentWasSpawned)
+        {
+            DisableProgressBar();
+            Reset();
+        }
+        else if ((value == slider.maxValue || value > slider.maxValue) &&
+                 !descentToTheNextLevel.descentWasSpawned)
+        {
+            EnableProgressBar();
+            ReachedMaxValue();
+        }
+        else
+            EnableProgressBar();
     }
-    else
-      EnableProgressBar();
-  }
 
-  public void IncreaseValue()
-  {
-    slider.value = ++value;
+    public void IncreaseValue()
+    {
+        slider.value = ++value;
 
-    if (value == slider.maxValue)
-      ReachedMaxValue();
-  }
+        if (value == slider.maxValue)
+            ReachedMaxValue();
+    }
 
-  private void ReachedMaxValue()
-  {
-    GenerateNextLevelButton();
-    ChangeFillerColour();
-    ChangeImageColor();
+    private void ReachedMaxValue()
+    {
+        GenerateNextLevelButton();
+        ChangeFillerColour();
 
-    void GenerateNextLevelButton() =>
-        button.enabled = true;
-    void ChangeFillerColour() =>
-        filler.color = Color.green;
-    void ChangeImageColor() =>
-    progressBarImg.color = Color.green;
-  }
+        void GenerateNextLevelButton() =>
+            button.enabled = true;
 
-  #region ProgressBarController
+        void ChangeFillerColour() =>
+            filler.color = Color.green;
+    }
 
-  public void DisableProgressBar()
-  {
-    progressBar.SetActive(false);
-    button.enabled = false;
-  }
+#region ProgressBarController
 
-  public void EnableProgressBar() =>
-      progressBar.SetActive(true);
+    public void DisableProgressBar()
+    {
+        gameObject.SetActive(false);
+        button.enabled = false;
+    }
 
-  public void Reset()
-  {
-    slider.value = 0;
-    value = 0;
-    filler.color = Color.white;
-  }
+    public void EnableProgressBar() =>
+        gameObject.SetActive(true);
 
-  #endregion
+    public void Reset()
+    {
+        slider.value = 0;
+        value = 0;
+        filler.color = Color.white;
+    }
+
+#endregion
 }

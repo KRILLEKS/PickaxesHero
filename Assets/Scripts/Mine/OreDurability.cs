@@ -13,6 +13,7 @@ public class OreDurability : MonoBehaviour
     // local variables
     private float durability = 100f;
     private float armor = 10f;
+    private int index;
 
 
     private void Awake()
@@ -24,6 +25,7 @@ public class OreDurability : MonoBehaviour
 
         durability = oreStats.durability;
         armor = oreStats.armor;
+        index = oreStats.index;
         gameObject.GetComponent<SpriteRenderer>().sprite = oreStats.sprites[Random.Range(0, oreStats.sprites.Length)];
     }
 
@@ -36,11 +38,11 @@ public class OreDurability : MonoBehaviour
             DestroyOre(true);
     }
 
-    public void DestroyOre(bool getResourse)
+    public void DestroyOre(bool getResource)
     {
-        if (getResourse)
+        if (getResource)
         {
-            extractedOresCounter.GetOre(gameObject.name);
+            extractedOresCounter.GetOre(index);
             animatorController.InvertIsMiningVar();
         }
 

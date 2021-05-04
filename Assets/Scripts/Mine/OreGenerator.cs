@@ -12,7 +12,7 @@ public class OreGenerator : MonoBehaviour
 
     // local variables
     private float[] values;
-    private readonly List<GameObject> oresPrefabs = new List<GameObject>();
+    private  List<GameObject> oresPrefabs = new List<GameObject>();
     private readonly List<GameObject> ores = new List<GameObject>();
     private float rand;
     public List<float> randNumbers = new List<float>(); // it needs for loading system
@@ -24,7 +24,7 @@ public class OreGenerator : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         chancesGenerator = GameObject.FindObjectOfType<ChancesGenerator>();
 
-        LoadOresPrefabs();
+        oresPrefabs = Resources.LoadAll<GameObject>("OresPrefabs").ToList();
     }
 
     public void LoadOres(OresData oresData)
@@ -37,40 +37,6 @@ public class OreGenerator : MonoBehaviour
         Debug.Log("Level : " + currentLevel);
 
         GenerateOres(false);
-    }
-
-    private void LoadOresPrefabs()
-    {
-        int oreNumber = 1; // it needs for AddOreMethod
-
-        AddOre("Stone");
-        AddOre("Tin");
-        AddOre("Copper");
-        AddOre("Zinc");
-        AddOre("Basalt");
-        AddOre("Iron");
-        AddOre("Bismuth");
-        AddOre("Chromite");
-        AddOre("Gold");
-        AddOre("Platinum");
-        AddOre("HellStone");
-        AddOre("Titan");
-        AddOre("Tungsten");
-        AddOre("Cobalt");
-        AddOre("Quartz");
-        AddOre("Cinnabar");
-        AddOre("Palladium");
-        AddOre("Obsidian");
-        AddOre("Talmallit");
-        AddOre("Diamond");
-        AddOre("Nanite");
-        AddOre("Dragonite");
-        AddOre("Mythit");
-
-        void AddOre(string oreName)
-        {
-            oresPrefabs.Add(Resources.Load<GameObject>($"OresPrefabs/{oreNumber++}_{oreName}"));
-        }
     }
 
     private void DestroyOres()

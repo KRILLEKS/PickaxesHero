@@ -26,13 +26,8 @@ public class SingleExtractedOresCounter : MonoBehaviour
         }
     }
 
-    public void GetOre(string oreName)
+    public void GetOre(int index)
     {
-        Regex regex = new Regex(@"^\d*");
-        oreName = regex.Match(oreName).Value; // gets ore number
-
-        int index = int.Parse(oreName) - 1; // gets index
-
         ores[index]++;
         thisLevelOres[index]++;
     }
