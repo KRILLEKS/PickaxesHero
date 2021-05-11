@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class SetValuesToPlayer : MonoBehaviour
 {
-  [SerializeField]
-  UnityEngine.Experimental.Rendering.Universal.Light2D light2D;
+    [SerializeField]
+    UnityEngine.Experimental.Rendering.Universal.Light2D light2D;
 
-  // global variables
-  SinglePlayerValues playerValues;
+    private void Start()
+    {
+        FindObjectOfType<Mining>().damage = SinglePlayerValues.damageValue;
 
-  private void Start()
-  {
-    playerValues = FindObjectOfType<SinglePlayerValues>();
+        FindObjectOfType<ChracterAnimatorController>().SetAnimationsSpeed(
+            SinglePlayerValues
+                .miningSpeedValue);
 
-    FindObjectOfType<Mining>().damage = playerValues.damageValue;
-    FindObjectOfType<ChracterAnimatorController>().SetAnimationsSpeed(playerValues.miningSpeedValue);
-    light2D.pointLightOuterRadius = playerValues.lightRadiusValue;
-  }
+        light2D.pointLightOuterRadius = SinglePlayerValues.lightRadiusValue;
+
+        FindObjectOfType<SellingController>().sellSpeed =
+            SinglePlayerValues.sellSpeedValue;
+        SellingController._oresToSell = SinglePlayerValues.oresToSell;
+    }
 }

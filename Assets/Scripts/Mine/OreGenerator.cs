@@ -54,8 +54,6 @@ public class OreGenerator : MonoBehaviour
 
         DestroyOres();
 
-        Debug.Log("Level : " + currentLevel);
-
         GenerateOres(true);
     }
 
@@ -64,7 +62,8 @@ public class OreGenerator : MonoBehaviour
     {
         values = chancesGenerator.GetChance();
 
-        Debug.Log("Total Chances = " + values.Sum());
+        if (values.Sum() != 100)
+            Debug.LogError("ERROR");
 
         if (newOres) // generate new ores
         {

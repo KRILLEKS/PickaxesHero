@@ -9,20 +9,17 @@ public class ShopMenuController : MonoBehaviour
     [SerializeField] private GameObject hatContent;
 
     // global variables
-    private SinglePlayerValues playerValues;
     private Upgrade[] pickaxeUpgrade;
     private Upgrade[] stickUpgrade;
     private Upgrade[] hatUpgrade;
 
     // local variables
-    private int PickaxeHeadIndex = 0;
-    private int stickIndex = 0;
-    private int hatIndex = 0;
+    [HideInInspector] public int pickaxeHeadIndex = 0;
+    [HideInInspector] public int stickIndex = 0;
+    [HideInInspector] public int hatIndex = 0;
 
     private void Awake()
     {
-        playerValues = FindObjectOfType<SinglePlayerValues>();
-
         pickaxeUpgrade =
             Resources.LoadAll<Upgrade>("Upgrades/pickaxeHead");
         stickUpgrade =
@@ -37,7 +34,7 @@ public class ShopMenuController : MonoBehaviour
 #region Upgrade
 
     public void UpgradePickaxeHead() =>
-        Upgrade(pickaxeUpgrade[PickaxeHeadIndex],
+        Upgrade(pickaxeUpgrade[pickaxeHeadIndex],
             Constants.Items.PickaxeHead);
 
     public void UpgradeStick() =>
@@ -63,15 +60,15 @@ public class ShopMenuController : MonoBehaviour
             switch (itemToUpgrade)
             {
                 case Constants.Items.PickaxeHead:
-                    playerValues.damageValue =
-                        pickaxeUpgrade[++PickaxeHeadIndex].value;
+                    SinglePlayerValues.damageValue =
+                        pickaxeUpgrade[++pickaxeHeadIndex].value;
                     break;
                 case Constants.Items.Stick:
-                    playerValues.miningSpeedValue =
+                    SinglePlayerValues.miningSpeedValue =
                         stickUpgrade[++stickIndex].value;
                     break;
                 case Constants.Items.Hat:
-                    playerValues.lightRadiusValue =
+                    SinglePlayerValues.lightRadiusValue =
                         hatUpgrade[++hatIndex].value;
                     break;
                 default:
@@ -107,7 +104,7 @@ public class ShopMenuController : MonoBehaviour
             case Constants.Items.PickaxeHead:
                 SetCost(pickaxeUpgrade,
                     pickaxeHeadContent,
-                    PickaxeHeadIndex);
+                    pickaxeHeadIndex);
                 break;
             case Constants.Items.Stick:
                 SetCost(stickUpgrade, stickContent, stickIndex);
@@ -146,5 +143,12 @@ public class ShopMenuController : MonoBehaviour
         {
             content.transform.GetChild(i).gameObject.SetActive(false);
         }
+    }
+
+    public void LoadIndexes(ShopMenuData shopMenuData)
+    {
+        pickaxeHeadIndex = shopMenuData.pickaxeHeadIndex;
+        stickIndex = shopMenuData.stickIndex;
+        hatIndex = shopMenuData.hatIndex;
     }
 }

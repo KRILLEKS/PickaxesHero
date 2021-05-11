@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using ICSharpCode.NRefactory.Ast;
 using TMPro;
 using UnityEngine;
 
 public class OpenModalMenu : MonoBehaviour
 {
+    [SerializeField] public BuyOrSell _buyOrSell;
     [SerializeField] private GameObject modalMenu;
 
     // local variables
@@ -14,9 +14,16 @@ public class OpenModalMenu : MonoBehaviour
     private BuyOrSellMenu _buyOrSellMenu;
     [HideInInspector] public TextMeshProUGUI textMeshProUGUI;
 
+    public enum BuyOrSell
+    {
+        Buy,
+        Sell
+    }
+
     private void Awake()
     {
         textMeshProUGUI = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+
         _buyOrSellMenu = modalMenu.GetComponent<BuyOrSellMenu>();
     }
 
@@ -29,7 +36,6 @@ public class OpenModalMenu : MonoBehaviour
     {
         modalMenu.SetActive(true);
 
-        Debug.Log(ore.name);
         _buyOrSellMenu.SetUp(this);
     }
 }

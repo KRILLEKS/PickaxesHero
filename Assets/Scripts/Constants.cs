@@ -51,7 +51,11 @@ public class Constants : MonoBehaviour
     {
 
       name = Constants.oresNames[index],
+      
+      index = index,
+      
       shardTexture = Resources.LoadAll<Texture>("Shards")[index],
+      
       buyPrice = oreCostDatabase[index].buyCost,
       sellPrice = oreCostDatabase[index].sellCost
     };

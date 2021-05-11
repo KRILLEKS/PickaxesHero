@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7430015563815284948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7430015563815284950}
+  - component: {fileID: 7430015563815284949}
+  m_Layer: 0
+  m_Name: DataBase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7430015563815284950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7430015563815284948}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 372.06726, y: 16.641548, z: -0.30691007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7430015563815284949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7430015563815284948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab93d17426c14b948a10ce6e9c1c2492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oreCostsDatabase:
+  - oreName: Stone
+    index: 0
+    buyCost: 10
+    sellCost: 2
+  - oreName: Tin
+    index: 1
+    buyCost: 25
+    sellCost: 5
+  - oreName: Copper
+    index: 2
+    buyCost: 50
+    sellCost: 10
+  - oreName: Zinc
+    index: 3
+    buyCost: 100
+    sellCost: 20
+  - oreName: Basalt
+    index: 4
+    buyCost: 150
+    sellCost: 30
+  - oreName: Iron
+    index: 5
+    buyCost: 250
+    sellCost: 50
+  - oreName: Bismuth
+    index: 6
+    buyCost: 350
+    sellCost: 70
+  - oreName: Chromite
+    index: 7
+    buyCost: 500
+    sellCost: 100
+  - oreName: Gold
+    index: 8
+    buyCost: 650
+    sellCost: 130
+  - oreName: Platinum
+    index: 9
+    buyCost: 750
+    sellCost: 150
+  - oreName: Hellstone
+    index: 10
+    buyCost: 900
+    sellCost: 180
+  - oreName: Titan
+    index: 11
+    buyCost: 1100
+    sellCost: 220
+  - oreName: Tungsten
+    index: 12
+    buyCost: 1250
+    sellCost: 250
+  - oreName: Cobalt
+    index: 13
+    buyCost: 1500
+    sellCost: 300
+  - oreName: Quartz
+    index: 14
+    buyCost: 1800
+    sellCost: 360
+  - oreName: Cinnabar
+    index: 15
+    buyCost: 2150
+    sellCost: 430
+  - oreName: Palladium
+    index: 16
+    buyCost: 2500
+    sellCost: 500
+  - oreName: Obsidian
+    index: 17
+    buyCost: 3000
+    sellCost: 600
+  - oreName: Talmallit
+    index: 18
+    buyCost: 4000
+    sellCost: 800
+  - oreName: Diamond
+    index: 19
+    buyCost: 5000
+    sellCost: 1000
+  - oreName: Nanite
+    index: 20
+    buyCost: 6000
+    sellCost: 1200
+  - oreName: Dragonit
+    index: 21
+    buyCost: 7000
+    sellCost: 1400
+  - oreName: Mythit
+    index: 22
+    buyCost: 8000
+    sellCost: 1600

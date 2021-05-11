@@ -4,21 +4,12 @@ using UnityEngine;
 
 public class SwitchPanels : MonoBehaviour
 {
-  [SerializeField]
-  private GameObject bigPanel;
-  [SerializeField]
-  private GameObject listPanel;
+    [SerializeField] private GameObject bigPanel;
+    [SerializeField] private GameObject listPanel;
 
-  public void Switch()
-  {
-    if (bigPanel.activeSelf)
-      bigPanel.SetActive(false);
-    else
-      bigPanel.SetActive(true);
-
-    if (listPanel.activeSelf)
-      listPanel.SetActive(false);
-    else
-      listPanel.SetActive(true);
-  }
+    public void Switch()
+    {
+        bigPanel.SetActive(!bigPanel.activeSelf);
+        listPanel.SetActive(!listPanel.activeSelf);
+    }
 }

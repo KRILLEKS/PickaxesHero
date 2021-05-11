@@ -1,27 +1,31 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class DescentToTheNextLevel : MonoBehaviour
 {
-    [SerializeField] 
-    public GameObject nextLevelMenu;
+    [SerializeField] public GameObject nextLevelMenu;
 
     // global variables
-    private GameObject player;
-    private GameObject descentPrefab;
-    public GridBehavior _gridBehavior;
-    private CsGlobal csGlobal;
-    public OreGenerator oreGenerator;
-    public GenerateLevel generateLevel;
-    public ProgressBar progressBar;
-    public BonusOresMenu bonusOresMenu;
+    public UnityEvent onDescending;
 
     // local variables
-    public bool descentWasSpawned = false;
-    public bool needsToLoadNextLevel = false;
-    public GameObject descent;
+    [HideInInspector] public bool descentWasSpawned = false;
+    [HideInInspector] public bool needsToLoadNextLevel = false;
+    [HideInInspector] public GameObject descent;
+    [HideInInspector] public GridBehavior _gridBehavior;
+    [HideInInspector] public OreGenerator oreGenerator;
+    [HideInInspector] public GenerateLevel generateLevel;
+    [HideInInspector] public ProgressBar progressBar;
+    [HideInInspector] public BonusOresMenu bonusOresMenu;
+    private GameObject player;
+    private GameObject descentPrefab;
+    private CsGlobal csGlobal;
 
     private void Awake()
     {
+        if (onDescending == null)
+            new UnityEvent();
+
         player = GameObject.FindGameObjectWithTag("Player");
         descentPrefab = Resources.Load("Descent") as GameObject;
         _gridBehavior = FindObjectOfType<GridBehavior>();
@@ -32,7 +36,7 @@ public class DescentToTheNextLevel : MonoBehaviour
         bonusOresMenu = FindObjectOfType<BonusOresMenu>();
     }
 
-    #region descent spawning
+#region descent spawning
 
     public void LoadDescent(DescentData descentData)
     {
@@ -40,8 +44,10 @@ public class DescentToTheNextLevel : MonoBehaviour
             return;
 
         descent = Instantiate(descentPrefab,
-            new Vector3(descentData.position[0], descentData.position[1], descentData.position[2]),
-            Quaternion.identity);
+                              new Vector3(descentData.position[0],
+                                          descentData.position[1],
+                                          descentData.position[2]),
+                              Quaternion.identity);
 
         descentWasSpawned = true;
     }
@@ -54,9 +60,12 @@ public class DescentToTheNextLevel : MonoBehaviour
 
         // TODO: Spawn a descent based on player`s rotation
         descent = Instantiate(descentPrefab,
-            Vector3Int.FloorToInt(player.transform.position) + new Vector3(.5f, .5f) + new Vector3(1, 0),
-            Quaternion.identity);
-        _gridBehavior.RemoveArrayElement(player.transform.position + new Vector3(1, 0));
+                              Vector3Int.FloorToInt(player.transform.position) +
+                              new Vector3(.5f, .5f) +
+                              new Vector3(1, 0),
+                              Quaternion.identity);
+        _gridBehavior.RemoveArrayElement(
+            player.transform.position + new Vector3(1, 0));
         descentWasSpawned = true;
     }
 
@@ -71,27 +80,30 @@ public class DescentToTheNextLevel : MonoBehaviour
         DestroyOre(-1, 1); // destroys the block in the top left corner
         DestroyOre(-1, -1); // destroys the block in the bottom left corner
 
-        void DestroyOre(int x, int y)
+        void DestroyOre(int x,
+                        int y)
         {
             Vector3 offset = new Vector3(x, y);
-            Collider2D hitInfo = Physics2D.OverlapPoint(player.transform.position + offset);
+            Collider2D hitInfo =
+                Physics2D.OverlapPoint(player.transform.position + offset);
 
             if (hitInfo && hitInfo.tag == "Ore")
                 hitInfo.GetComponent<OreDurability>().DestroyOre(false);
         }
     }
 
-    #endregion
+#endregion
 
-    #region nextLevel
+#region nextLevel
 
     // Invokes on player`s touch
     public void ChecksItThereADescent()
     {
         if (descentWasSpawned)
         {
-            Collider2D hitInfo = Physics2D.OverlapPoint(csGlobal.g_mousePosition);
-            if (hitInfo && hitInfo.tag == "Descent")
+            Collider2D hitInfo =
+                Physics2D.OverlapPoint(csGlobal.g_mousePosition);
+            if (hitInfo && hitInfo.CompareTag("Descent"))
                 needsToLoadNextLevel = true;
             else
                 needsToLoadNextLevel = false;
@@ -110,6 +122,7 @@ public class DescentToTheNextLevel : MonoBehaviour
     {
         if (needsToLoadNextLevel)
         {
+            onDescending.Invoke();
             // TODO: there should be a transition scene
             Destroy(descent);
             descentWasSpawned = false;
@@ -125,10 +138,10 @@ public class DescentToTheNextLevel : MonoBehaviour
 
             progressBar.EnableProgressBar();
             progressBar.Reset();
-            
+
             bonusOresMenu.SetTextEqualToCurrentLevel();
         }
     }
 
-    #endregion
+#endregion
 }

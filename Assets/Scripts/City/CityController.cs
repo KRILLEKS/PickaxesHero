@@ -1,41 +1,62 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CityController : MonoBehaviour
 {
-  [SerializeField]
-  private GameObject shopMenu;
-  [SerializeField]
-  private GameObject closeButton;
+    [SerializeField] private GameObject filler;
 
-  // local variables
-  private bool needsToLoadMine = false;
-  private bool needsToOpenShopMenu = false;
-
-  // invokes ob touch
-  public void CheckTarget()
-  {
-    Collider2D hitInfo = Physics2D.OverlapPoint(FindObjectOfType<CsGlobal>().g_mousePosition);
-    if (hitInfo && hitInfo.CompareTag("Descent"))
-      needsToLoadMine = true;
-    if (hitInfo && hitInfo.CompareTag("Shop"))
-      needsToOpenShopMenu = true;
-  }
-
-  // invokes on player stop
-  public void AtStop()
-  {
-    if (needsToLoadMine)
-      FindObjectOfType<GameManager>().LoadMine();
-    if (needsToOpenShopMenu)
-      OpenMenu(shopMenu, ref needsToOpenShopMenu);
-
-    void OpenMenu(GameObject menu, ref bool menuController)
+    // public variables
+    public UnityEvent onDescending;
+    public enum buildings
     {
-      menu.SetActive(true);
-      menuController = false;
-      closeButton.SetActive(true);
+        descent,
+        building
     }
-  }
+
+    // local variables
+    private CsGlobal _csGlobal;
+    private BuildingDefinition _buildingDefinition;
+    private GameManager _gameManager;
+    private void Awake()
+    {
+        if (onDescending == null)
+            new UnityEvent();
+        
+        _csGlobal = FindObjectOfType<CsGlobal>();
+        _gameManager = FindObjectOfType<GameManager>();
+    }
+
+    // invokes ob touch
+    public void CheckTarget()
+    {
+        _buildingDefinition = null;
+
+        var hitInfo = Physics2D.OverlapPoint(_csGlobal.g_mousePosition);
+        if (hitInfo != null)
+            _buildingDefinition = hitInfo.GetComponent<BuildingDefinition>();
+    }
+
+    // invokes on player stop
+    public void AtStop()
+    {
+        if (_buildingDefinition != null)
+            switch (_buildingDefinition.building)
+            {
+                case buildings.descent:
+                    _gameManager.LoadMine();
+                    onDescending.Invoke();
+                    break;
+                case buildings.building:
+                    _buildingDefinition.menuToOpen.SetActive(true);
+                    filler.SetActive(true);
+                    break;
+                default:
+                    Debug.LogError("ERROR");
+                    break;
+            }
+    }
 }

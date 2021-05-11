@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class OresData : MonoBehaviour
+public class OresData
 {
   public int indexer;
   public List<float> randNumbers;

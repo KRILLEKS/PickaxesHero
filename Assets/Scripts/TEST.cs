@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class TEST : MonoBehaviour
 {
-    [SerializeField] bool turnLightOn = false;
+    [SerializeField] private int moneyAmount = 1000;
+
+    [Space] [SerializeField] bool turnLightOn = false;
 
     [Space] [SerializeField] private bool needsToLoadLevel = false;
     [SerializeField] int level = 1;
@@ -17,14 +19,16 @@ public class TEST : MonoBehaviour
 
     private void Start()
     {
+        if (infinityMoney)
+            SetInfinityMoney(); 
+        
+        MoneyController.money = moneyAmount;
+        
         if (needsToLoadLevel)
             LoadLevel();
 
         if (turnLightOn)
             SwithLight();
-
-        if (infinityMoney)
-            SetInfinityMoney();
     }
 
     private void LoadLevel()
@@ -61,5 +65,10 @@ public class TEST : MonoBehaviour
         SingleExtractedOresCounter.ores = SingleExtractedOresCounter.ores
             .Select(ore
                 => ore = 10000).ToArray();
+    }
+
+    public void WriteInConsole()
+    {
+        Debug.Log("Touch");
     }
 }

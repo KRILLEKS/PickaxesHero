@@ -1,60 +1,53 @@
-﻿using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 
+// this script should be on content
 public class UpdateOresInfo : MonoBehaviour
 {
-    [SerializeField] private GameObject bigPanelContent;
-    [SerializeField] private GameObject listPanelContent;
-
-    // global variables
-    private SingleExtractedOresCounter extractedOresCounter;
-
     // local variables
-    private TextMeshProUGUI[] bigPanelValues;
-    private TextMeshProUGUI[] listPanelValues;
+    private TextMeshProUGUI[] _textMeshProUguis = new
+        TextMeshProUGUI[Constants.oresAmount];
 
     private void Awake()
     {
-        extractedOresCounter = FindObjectOfType<SingleExtractedOresCounter>();
-        int oresAmount = bigPanelContent.transform.childCount;
-
-        SetListPanelArray();
-        SetBigPanelArray();
-
-        void SetListPanelArray()
+        for (int i = 0; i < Constants.oresAmount; i++)
         {
-            listPanelValues = new TextMeshProUGUI[oresAmount];
-            int iterator = 0;
-
-            for (int i = 0; i < listPanelContent.transform.childCount; i++)
-                for (int j = 0;
-                    j < listPanelContent.transform.GetChild(i).childCount;
-                    j++)
-                    listPanelValues[iterator++] = listPanelContent.transform
-                        .GetChild(i).GetChild(j).GetChild(0).gameObject
-                        .GetComponent<TextMeshProUGUI>();
-        }
-
-        void SetBigPanelArray()
-        {
-            // gameObject == content
-            bigPanelValues = new TextMeshProUGUI[oresAmount];
-
-            for (int i = 0; i < oresAmount; i++)
-                bigPanelValues[i] = bigPanelContent
-                                    .transform.GetChild(i).Find("Amount")
-                                    .gameObject.GetComponent<TextMeshProUGUI>();
+            if (gameObject.activeSelf)
+                _textMeshProUguis[i] = gameObject.transform.GetChild(i).Find
+                    ("Amount").gameObject.GetComponent<TextMeshProUGUI>();
         }
     }
 
-    public void SetValues()
+    public void SetContentInfo()
     {
-        for (int i = 0; i < bigPanelValues.Length; i++)
-            bigPanelValues[i].text =
-                SingleExtractedOresCounter.ores[i].ToString();
+        SetValues(_textMeshProUguis, SingleExtractedOresCounter.ores);
+    }
 
-        for (int i = 0; i < listPanelValues.Length; i++)
-            listPanelValues[i].text =
-                SingleExtractedOresCounter.ores[i].ToString();
+    public void SetSellInfo()
+    {
+        // TODO: WHAT IS THIS
+        int[] values = new int[Constants.oresAmount];
+
+        for (int i = 0; i < Constants.oresAmount; i++)
+        {
+            if (SellingController._oresToSell.ContainsKey(i))
+                values[i] = SellingController._oresToSell[i];
+            else
+                values[i] = 0;
+        }
+
+        SetValues(_textMeshProUguis, values);
+    }
+
+    public static void SetValues(TextMeshProUGUI[] textMeshProUGUI,
+        int[] values)
+    {
+        for (int i = 0; i < Constants.oresAmount; i++)
+            if (textMeshProUGUI[i] != null)
+                textMeshProUGUI[i].text =
+                    values[i].ToString();
     }
 }

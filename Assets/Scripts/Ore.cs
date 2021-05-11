@@ -8,6 +8,8 @@ public class Ore
 {
     public string name;
 
+    public int index;
+    
     public Texture shardTexture;
 
     public float buyPrice;
