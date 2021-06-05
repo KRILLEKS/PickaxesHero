@@ -16,9 +16,5 @@ public class SetValuesToPlayer : MonoBehaviour
                 .miningSpeedValue);
 
         light2D.pointLightOuterRadius = SinglePlayerValues.lightRadiusValue;
-
-        FindObjectOfType<SellingController>().sellSpeed =
-            SinglePlayerValues.sellSpeedValue;
-        SellingController._oresToSell = SinglePlayerValues.oresToSell;
     }
 }

@@ -10,11 +10,7 @@ public class PlayerValuesData
     public float miningSpeedValue;
     public float lightRadiusValue;
 
-    public float sellSpeedValue;
     public float moneyAmount;
-    public Dictionary<int, int> oresToSell;
-
-    public int sceneIndex;
     
     public PlayerValuesData()
     {
@@ -22,10 +18,6 @@ public class PlayerValuesData
         miningSpeedValue = SinglePlayerValues.miningSpeedValue;
         lightRadiusValue = SinglePlayerValues.lightRadiusValue;
 
-        sellSpeedValue = SinglePlayerValues.sellSpeedValue;
-        oresToSell = SinglePlayerValues.oresToSell;
         moneyAmount = SinglePlayerValues.moneyAmount;
-
-        sceneIndex = SinglePlayerValues.sceneIndex;
     }
 }

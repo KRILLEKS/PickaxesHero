@@ -23,6 +23,9 @@ TextureImporter:
   - first:
       213: 8725973071944354434
     second: Separated_Down_6
+  - first:
+      213: -7993014311912227743
+    second: Separated_Down_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -67,7 +70,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 4000
+  spritePixelsToUnits: 8000
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -76,6 +79,8 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -125,12 +130,12 @@ TextureImporter:
       name: Separated_Down_0
       rect:
         serializedVersion: 2
-        x: 3151
-        y: 4887
-        width: 2452
-        height: 2911
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 5092
+        y: 6000
+        width: 4271
+        height: 2924
+      alignment: 9
+      pivot: {x: 0.5299199, y: 0.11591169}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,9 +152,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 725
-        width: 626
-        height: 2864
+        y: 2237
+        width: 1046
+        height: 2803
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,12 +172,12 @@ TextureImporter:
       name: Separated_Down_2
       rect:
         serializedVersion: 2
-        x: 1583
-        y: 3010
-        width: 810
-        height: 1512
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 2625
+        y: 2888
+        width: 1376
+        height: 1514
+      alignment: 9
+      pivot: {x: 0.7433326, y: 0.75432616}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,10 +193,10 @@ TextureImporter:
       name: Separated_Down_3
       rect:
         serializedVersion: 2
-        x: 3372
-        y: 2702
-        width: 2040
-        height: 1746
+        x: 5611
+        y: 2924
+        width: 3572
+        height: 1747
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,12 +214,12 @@ TextureImporter:
       name: Separated_Down_4
       rect:
         serializedVersion: 2
-        x: 6871
-        y: 2989
-        width: 805
-        height: 1533
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 10069
+        y: 2888
+        width: 1400
+        height: 1514
+      alignment: 9
+      pivot: {x: 0.25934082, y: 0.7596269}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,12 +235,12 @@ TextureImporter:
       name: Separated_Down_5
       rect:
         serializedVersion: 2
-        x: 2793
-        y: 19
-        width: 1001
-        height: 1791
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 4252
+        y: 0
+        width: 1746
+        height: 1794
+      alignment: 9
+      pivot: {x: 0.49999973, y: 0.79861844}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -251,12 +256,12 @@ TextureImporter:
       name: Separated_Down_6
       rect:
         serializedVersion: 2
-        x: 4865
+        x: 8175
         y: 0
-        width: 1012
+        width: 1750
         height: 1797
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5160441, y: 0.796861}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -264,6 +269,27 @@ TextureImporter:
       bones: []
       spriteID: 28a0ed8d642e81970800000000000000
       internalID: 8725973071944354434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Separated_Down_7
+      rect:
+        serializedVersion: 2
+        x: 11964
+        y: 885
+        width: 241
+        height: 865
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16cbbd505db131190800000000000000
+      internalID: -7993014311912227743
       vertices: []
       indices: 
       edges: []

@@ -45,8 +45,6 @@ public class Constants : MonoBehaviour
 
   public static Ore GetOre(int index)
   {
-    var oreCostDatabase = FindObjectOfType<Data>().oreCostsDatabase;
-    
     return new Ore
     {
 
@@ -56,8 +54,8 @@ public class Constants : MonoBehaviour
       
       shardTexture = Resources.LoadAll<Texture>("Shards")[index],
       
-      buyPrice = oreCostDatabase[index].buyCost,
-      sellPrice = oreCostDatabase[index].sellCost
+      buyPrice = Mathf.Pow(index + 1, 3) * 5,
+      sellPrice = Mathf.Pow(index + 1, 3)
     };
   }
 

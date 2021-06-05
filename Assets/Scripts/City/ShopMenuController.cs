@@ -124,7 +124,6 @@ public class ShopMenuController : MonoBehaviour
             {
                 if (upgrade[index].cost[i] != 0)
                 {
-                    Debug.Log($"{content.name} ore {i} index {index}");
                     content.transform.GetChild(i * 2).gameObject
                            .SetActive(true);
                     content.transform.GetChild(i * 2 + 1).gameObject

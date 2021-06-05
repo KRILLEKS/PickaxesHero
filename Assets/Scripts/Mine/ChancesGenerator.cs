@@ -6,250 +6,317 @@ using UnityEngine;
 
 public class ChancesGenerator : MonoBehaviour
 {
-  [SerializeField]
-  float fillerPercentage = 76f;
-  [SerializeField]
-  float stoneDecreasePerLvl = 3f; // how many percent will stone give to ore in first chances generation
-  [SerializeField]
-  float talmallitIncreasePerLvl = 1f;
-  [SerializeField]
-  float desctroyTailPercentage = 2.5f;
-  [SerializeField]
-  float tailDecreasePercentage = 2.5f;
-  [SerializeField]
-  float lastOresValue = 0.1f; // it needs for last ores generation part
+    [SerializeField] float fillerPercentage = 76f;
 
-  // private variables
-  Dictionary<float, float> oresChanceChanges = new Dictionary<float, float>();
-  Dictionary<int, float> fillerChanceChanges = new Dictionary<int, float>();
+    [SerializeField] float
+        stoneDecreasePerLvl =
+            3f; // how many percent will stone give to ore in first chances generation
 
-  // local variables
-  private float[] previousLevelChances = new float[Constants.oresAmount];
-  private int lastOresIndex = 0; // it needs for last ores generation part  
-  int[] fillersIndexes = new int[Constants.fillerIndexes.Length];
-  int[] oresIndexes = new int[Constants.oresAmount - Constants.fillerIndexes.Length];
-  int tailIndex = 0; //use in Delete tails method
+    [SerializeField] float talmallitIncreasePerLvl = 1f;
+    [SerializeField] float desctroyTailPercentage = 2.5f;
+    [SerializeField] float tailDecreasePercentage = 2.5f;
 
-  void Start()
-  {
-    FillDictionaries();
-    SeparateOres();
+    [SerializeField]
+    float lastOresValue = 0.1f; // it needs for last ores generation part
 
-    previousLevelChances[0] = 100f; // first chance
-  }
-  private void FillDictionaries()
-  {
-    // TODO: ask on forums
-    // TODO: extend comment
-    // key - on which chance which change will be. Value - change value
-    oresChanceChanges.Add(15f, 2f);
-    oresChanceChanges.Add(12f, 1.5f);
-    oresChanceChanges.Add(10f, 1.2f);
-    oresChanceChanges.Add(7.5f, 1f);
-    oresChanceChanges.Add(5f, 0.5f);
-    oresChanceChanges.Add(3f, 0.35f);
-    oresChanceChanges.Add(1f, 0.2f);
-    oresChanceChanges.Add(0.75f, 0.1f);
-    oresChanceChanges.Add(0.5f, 0.01f);
+    // private variables
+    private readonly Dictionary<float, float> oresChanceChanges =
+        new Dictionary<float, float>();
 
-    // key it`s index. - it`s before filler. + it`s after filler. Value - change value
-    fillerChanceChanges.Add(-2, 0.2f);
-    fillerChanceChanges.Add(-1, 1f);
-    fillerChanceChanges.Add(1, 2f);
-    fillerChanceChanges.Add(2, 3.5f);
-    fillerChanceChanges.Add(3, 6.5f);
-    fillerChanceChanges.Add(4, 50f);
-  }
+    private readonly Dictionary<int, float> fillerChanceChanges = new
+        Dictionary<int, float>();
 
-  #region auxiliary methods
+    // local variables
+    public float[] currentLevelChances = new float[Constants.oresAmount];
+    public float[] previousLevelChances = new float[Constants.oresAmount];
+    private int lastOresIndex = 0; // it needs for last ores generation part  
 
-  void SeparateOres()
-  {
-    for (int i = 0, fillerIndex = 0, oresIndex = 0; i < Constants.oresAmount; i++)
+    private readonly int[] fillersIndexes =
+        new int[Constants.fillerIndexes.Length];
+
+    private readonly int[] oresIndexes =
+        new int[Constants.oresAmount - Constants.fillerIndexes.Length];
+
+    int tailIndex = 0; //use in Delete tails method
+
+    void Start()
     {
-      bool isOre = true;
+        FillDictionaries();
+        SeparateOres();
 
-      foreach (var index in Constants.fillerIndexes) // checks is it ore or filler
-        if (index == i)
-          isOre = false;
-
-      // TODO: i == index && (isOre = false);     logical expression c#
-
-      if (isOre) // add ores
-      {
-        oresIndexes[oresIndex++] = i;
-      }
-      else // add fillers
-      {
-        fillersIndexes[fillerIndex++] = i;
-      }
+        if (currentLevelChances.Sum() == 0)
+            currentLevelChances[0] = 100f; // first chance
     }
-  }
-  void MoveOresChances()
-  {
-    // we don`t want to interact with ore before tallmalit and with ores after talmallit, because we`ll interact with them throught other percentage generator
-    for (int i = oresIndexes.Length - 1 - (Constants.oresAmount - fillersIndexes[fillersIndexes.Length - 1]); i >= 0; i--)
-      if ((previousLevelChances[oresIndexes[i]] != 0) && (i != oresIndexes.Length - 1))
-        MoveOreChance(i);
 
-    DeleteTails();
-
-    void MoveOreChance(int i)
+    private void FillDictionaries()
     {
-      for (int j = 0; j < oresChanceChanges.Count; j++)
-      {
-        if (previousLevelChances[oresIndexes[i]] >= oresChanceChanges.Keys.ElementAt(j))
+        // TODO: ask on forums
+        // TODO: extend comment
+        // key - on which chance which change will be. Value - change value
+        oresChanceChanges.Add(15f, 2f);
+        oresChanceChanges.Add(12f, 1.5f);
+        oresChanceChanges.Add(10f, 1.2f);
+        oresChanceChanges.Add(7.5f, 1f);
+        oresChanceChanges.Add(5f, 0.5f);
+        oresChanceChanges.Add(3f, 0.35f);
+        oresChanceChanges.Add(1f, 0.2f);
+        oresChanceChanges.Add(0.75f, 0.1f);
+        oresChanceChanges.Add(0.5f, 0.01f);
+
+        // key it`s index. - it`s before filler. + it`s after filler. Value - change value
+        fillerChanceChanges.Add(-2, 0.2f);
+        fillerChanceChanges.Add(-1, 1f);
+        fillerChanceChanges.Add(1, 2f);
+        fillerChanceChanges.Add(2, 3.5f);
+        fillerChanceChanges.Add(3, 6.5f);
+        fillerChanceChanges.Add(4, 50f);
+    }
+
+#region auxiliary methods
+
+    void SeparateOres()
+    {
+        for (int i = 0, fillerIndex = 0, oresIndex = 0;
+             i < Constants.oresAmount;
+             i++)
         {
-          previousLevelChances[oresIndexes[i]] -= oresChanceChanges.Values.ElementAt(j);
-          previousLevelChances[oresIndexes[i + 1]] += oresChanceChanges.Values.ElementAt(j);
-          break;
+            bool isOre = true;
+
+            foreach (var index in
+                Constants.fillerIndexes) // checks is it ore or filler
+                if (index == i)
+                    isOre = false;
+
+            // TODO: i == index && (isOre = false);     logical expression c#
+
+            if (isOre) // add ores
+            {
+                oresIndexes[oresIndex++] = i;
+            }
+            else // add fillers
+            {
+                fillersIndexes[fillerIndex++] = i;
+            }
         }
-      }
     }
-  }
-  void MoveFillerChances()
-  {
-    // cycle goes throught all fillers except talmallit
-    for (int i = 0; i < fillersIndexes.Length - 1; i++) // -2, because we don`t want to do smth with tallmalit
+
+    void MoveOresChances()
     {
-      for (int j = 0; j < fillerChanceChanges.Count - 1; j++)
-      {
-        // checks need to move chances or no
-        if (previousLevelChances[fillersIndexes[i]] > 0
-          && (previousLevelChances[fillersIndexes[i + 1] + fillerChanceChanges.Keys.ElementAt(j)] > 0))
+        // we don`t want to interact with ore before tallmalit and with ores after talmallit, because we`ll interact with them throught other percentage generator
+        for (int i = oresIndexes.Length -
+                     1 -
+                     (Constants.oresAmount -
+                      fillersIndexes[fillersIndexes.Length - 1]);
+             i >= 0;
+             i--)
+            if ((currentLevelChances[oresIndexes[i]] != 0) &&
+                (i != oresIndexes.Length - 1))
+                MoveOreChance(i);
+
+        DeleteTails();
+
+        void MoveOreChance(int i)
         {
-          MoveChance(i);
-          break;
+            for (int j = 0; j < oresChanceChanges.Count; j++)
+            {
+                if (currentLevelChances[oresIndexes[i]] >=
+                    oresChanceChanges.Keys.ElementAt(j))
+                {
+                    currentLevelChances[oresIndexes[i]] -=
+                        oresChanceChanges.Values.ElementAt(j);
+                    currentLevelChances[oresIndexes[i + 1]] +=
+                        oresChanceChanges.Values.ElementAt(j);
+                    break;
+                }
+            }
         }
-      }
     }
 
-    void MoveChance(int index)
+    void MoveFillerChances()
     {
-      // for go via all filler change keys
-      for (int j = fillerChanceChanges.Count - 1; j >= 0; j--)
-      {
-        // if don`t check ores before stone, because there no ores
-        if ((index != 0 || fillerChanceChanges.Keys.ElementAt(j) > 0)
-        && (previousLevelChances[fillersIndexes[index + 1] + fillerChanceChanges.Keys.ElementAt(j)] > 0)) // checks wich percentage to add
+        // cycle goes throught all fillers except talmallit
+        for (int i = 0;
+             i < fillersIndexes.Length - 1;
+             i++) // -2, because we don`t want to do smth with tallmalit
         {
-          previousLevelChances[fillersIndexes[index]] -= fillerChanceChanges.Values.ElementAt(j);
-          previousLevelChances[fillersIndexes[index + 1]] += fillerChanceChanges.Values.ElementAt(j);
-
-          // it`s delete extra percentage, for example stone == -1, basalt == 101, if something like that happen it will be deleted
-          // so after that part stone == 0, basalt = 100
-          if (previousLevelChances[fillersIndexes[index]] < 0)
-          {
-            previousLevelChances[fillersIndexes[index + 1]] += previousLevelChances[fillersIndexes[index]];
-            previousLevelChances[fillersIndexes[index]] = 0;
-          }
-
-          break;
+            for (int j = 0; j < fillerChanceChanges.Count - 1; j++)
+            {
+                // checks need to move chances or no
+                if (currentLevelChances[fillersIndexes[i]] > 0 &&
+                    (currentLevelChances[
+                         fillersIndexes[i + 1] +
+                         fillerChanceChanges.Keys.ElementAt(j)] >
+                     0))
+                {
+                    MoveChance(i);
+                    break;
+                }
+            }
         }
-      }
+
+        void MoveChance(int index)
+        {
+            // for go via all filler change keys
+            for (int j = fillerChanceChanges.Count - 1; j >= 0; j--)
+            {
+                // if don`t check ores before stone, because there no ores
+                if ((index != 0 || fillerChanceChanges.Keys.ElementAt(j) > 0) &&
+                    (currentLevelChances[
+                         fillersIndexes[index + 1] +
+                         fillerChanceChanges.Keys.ElementAt(j)] >
+                     0)) // checks which percentage to add
+                {
+                    currentLevelChances[fillersIndexes[index]] -=
+                        fillerChanceChanges.Values.ElementAt(j);
+                    currentLevelChances[fillersIndexes[index + 1]] +=
+                        fillerChanceChanges.Values.ElementAt(j);
+
+                    // it`s delete extra percentage, for example stone == -1, basalt == 101, if something like that happen it will be deleted
+                    // so after that part stone == 0, basalt = 100
+                    if (currentLevelChances[fillersIndexes[index]] < 0)
+                    {
+                        currentLevelChances[fillersIndexes[index + 1]] +=
+                            currentLevelChances[fillersIndexes[index]];
+                        currentLevelChances[fillersIndexes[index]] = 0;
+                    }
+
+                    break;
+                }
+            }
+        }
     }
-  }
-  void DeleteTails()
-  {
-    if (previousLevelChances[oresIndexes[tailIndex]] < previousLevelChances[oresIndexes[tailIndex + 1]])
+
+    void DeleteTails()
     {
-      if (previousLevelChances[oresIndexes[tailIndex]] <= desctroyTailPercentage)
-      {
-        previousLevelChances[oresIndexes[tailIndex + 1]] += previousLevelChances[oresIndexes[tailIndex]];
-        previousLevelChances[oresIndexes[tailIndex]] = 0;
-        if (tailIndex != oresIndexes.Length - 2)
-          tailIndex++;
-      }
-      else
-      {
-        previousLevelChances[oresIndexes[tailIndex]] -= tailDecreasePercentage;
-        previousLevelChances[oresIndexes[tailIndex + 1]] += tailDecreasePercentage;
-      }
+        if (currentLevelChances[oresIndexes[tailIndex]] <
+            currentLevelChances[oresIndexes[tailIndex + 1]])
+        {
+            if (currentLevelChances[oresIndexes[tailIndex]] <=
+                desctroyTailPercentage)
+            {
+                currentLevelChances[oresIndexes[tailIndex + 1]] +=
+                    currentLevelChances[oresIndexes[tailIndex]];
+                currentLevelChances[oresIndexes[tailIndex]] = 0;
+                if (tailIndex != oresIndexes.Length - 2)
+                    tailIndex++;
+            }
+            else
+            {
+                currentLevelChances[oresIndexes[tailIndex]] -=
+                    tailDecreasePercentage;
+                currentLevelChances[oresIndexes[tailIndex + 1]] +=
+                    tailDecreasePercentage;
+            }
+        }
     }
-  }
 
-  #endregion
+#endregion
 
-  #region chances generation
+#region chances generation
 
-  bool GenerateFirstChances()
-  {
-    if (previousLevelChances[0] > fillerPercentage)
+    bool GenerateFirstChances()
     {
-      previousLevelChances[0] -= stoneDecreasePerLvl;
-      previousLevelChances[1] += stoneDecreasePerLvl;
+        if (currentLevelChances[0] > fillerPercentage)
+        {
+            currentLevelChances[0] -= stoneDecreasePerLvl;
+            currentLevelChances[1] += stoneDecreasePerLvl;
 
-      MoveOresChances();
+            MoveOresChances();
 
-      return true;
+            return true;
+        }
+
+        return false;
     }
 
-    return false;
-  }
-  bool GenerateSecondChances()
-  {
-    if (previousLevelChances[fillersIndexes[fillersIndexes.Length - 1]] <= fillerPercentage) // filler before tallamlit
+    bool GenerateSecondChances()
     {
-      MoveOresChances();
-      MoveFillerChances();
-      return true;
+        if (currentLevelChances[fillersIndexes[fillersIndexes.Length - 1]] <=
+            fillerPercentage) // filler before tallamlit
+        {
+            MoveOresChances();
+            MoveFillerChances();
+            return true;
+        }
+
+        return false;
     }
 
-    return false;
-  }
-  bool GenerateThirdChances()
-  {
-    if (previousLevelChances[fillersIndexes[fillersIndexes.Length - 1]] < 100) // transform ore before talmallit into tallmalit
+    bool GenerateThirdChances()
     {
-      previousLevelChances[fillersIndexes[fillersIndexes.Length - 1] - 1] -= talmallitIncreasePerLvl;
-      previousLevelChances[fillersIndexes[fillersIndexes.Length - 1]] += talmallitIncreasePerLvl;
+        if (currentLevelChances[fillersIndexes[fillersIndexes.Length - 1]] <
+            100) // transform ore before talmallit into tallmalit
+        {
+            currentLevelChances
+                    [fillersIndexes[fillersIndexes.Length - 1] - 1] -=
+                talmallitIncreasePerLvl;
+            currentLevelChances[fillersIndexes[fillersIndexes.Length - 1]] +=
+                talmallitIncreasePerLvl;
 
-      if (previousLevelChances[fillersIndexes[fillersIndexes.Length - 1]] > 100) // delete tail
-      {
-        previousLevelChances[fillersIndexes[fillersIndexes.Length - 1] - 1] = 0;
-        previousLevelChances[fillersIndexes[fillersIndexes.Length - 1]] = 100;
-      }
+            if (currentLevelChances
+                    [fillersIndexes[fillersIndexes.Length - 1]] >
+                100) // delete tail
+            {
+                currentLevelChances[fillersIndexes[fillersIndexes.Length - 1] -
+                                    1] = 0;
+                currentLevelChances
+                    [fillersIndexes[fillersIndexes.Length - 1]] = 100;
+            }
 
-      return true;
+            return true;
+        }
+
+        return false;
     }
 
-    return false;
-  }
-  void GenerateFourthChances()
-  {
-    // we have 2 variables. lastOresIndex and lastOresValue
-    // every iteration first from last ores gets +lastOresValue
-    // every two iterations second from last ores gets +lastOresValue
-    // every three iteration third from last ores gets +lastOresValue
-    // ....
-
-    // TODO: save index, in GenerationOresIndex.save
-
-    for (int i = 1; i <= previousLevelChances.Length - oresIndexes.Length; i++) // iterate via all last ores
+    void GenerateFourthChances()
     {
-      if (lastOresIndex % i == 0)
-      {
-        previousLevelChances[fillersIndexes[fillersIndexes.Length - 1]] -= lastOresValue;
-        previousLevelChances[fillersIndexes[fillersIndexes.Length - 1] + i] += lastOresValue;
-        lastOresIndex++;
-      }
+        // we have 2 variables. lastOresIndex and lastOresValue
+        // every iteration first from last ores gets +lastOresValue
+        // every two iterations second from last ores gets +lastOresValue
+        // every three iteration third from last ores gets +lastOresValue
+        // ....
+
+        // TODO: save index, in GenerationOresIndex.save
+
+        for (int i = 1;
+             i <= currentLevelChances.Length - oresIndexes.Length;
+             i++) // iterate via all last ores
+        {
+            if (lastOresIndex % i == 0)
+            {
+                currentLevelChances
+                        [fillersIndexes[fillersIndexes.Length - 1]] -=
+                    lastOresValue;
+                currentLevelChances[fillersIndexes[fillersIndexes.Length - 1] +
+                                    i] += lastOresValue;
+                lastOresIndex++;
+            }
+        }
     }
-  }
 
-  #endregion
+#endregion
 
-  public float[] GetChance()
-  {
-    // TODO: how to make it scalable
-    if (GenerateFirstChances())
-      return previousLevelChances;
-    else if (GenerateSecondChances())
-      return previousLevelChances;
-    else if (GenerateThirdChances())
-      return previousLevelChances;
-    else
-      GenerateFourthChances();
+    public float[] GetChance()
+    {
+        previousLevelChances = (float[])currentLevelChances.Clone();
 
-    return previousLevelChances;
-  }
+        // TODO: how to make it scalable
+        if (GenerateFirstChances())
+            return currentLevelChances;
+        else if (GenerateSecondChances())
+            return currentLevelChances;
+        else if (GenerateThirdChances())
+            return currentLevelChances;
+        else
+            GenerateFourthChances();
+
+        return currentLevelChances;
+    }
+
+    public void LoadChances(ChancesData chancesData)
+    {
+        Debug.Log("load chances");
+        currentLevelChances = chancesData.chances; // it`s previous chances
+    }
 }

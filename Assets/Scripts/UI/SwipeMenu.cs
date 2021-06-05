@@ -9,17 +9,17 @@ public abstract class SwipeMenu : MonoBehaviour
     [SerializeField] public Scrollbar scrollbar;
 
     // local variables
-    [HideInInspector] public float[] pos;
+    [HideInInspector] public float[] positions;
     [HideInInspector] public float distance; // distance between objects
     
     public void ScrollToNearest()
     {
-        for (int i = 0; i < pos.Length; i++)
-            if (scrollbar.value < pos[i] + (distance / 2) &&
-                scrollbar.value > pos[i] - (distance / 2))
+        foreach (var position in positions)
+            if (scrollbar.value < position + (distance / 2) &&
+                scrollbar.value > position - (distance / 2))
                 scrollbar.value = Mathf.Lerp(
                     scrollbar.value,
-                    pos[i],
+                    position,
                     transitionLerpTime * Time.fixedDeltaTime);
     }
 }

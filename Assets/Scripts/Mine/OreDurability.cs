@@ -44,10 +44,10 @@ public class OreDurability : MonoBehaviour
         {
             extractedOresCounter.GetOre(index);
             animatorController.InvertIsMiningVar();
+            progressBar.IncreaseValue();
         }
 
         Destroy(gameObject);
         _gridBehavior.InstantiateNewGridPrefab(transform.position);
-        progressBar.IncreaseValue();
     }
 }

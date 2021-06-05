@@ -6,14 +6,12 @@ using UnityEngine;
 [Serializable]
 public class BankData
 {
-    public float upgradeCost;
-    public float sellingSpeedIncrease;
+    public int upgradeIndex;
     public float progressAmount;
 
     public BankData()
     {
-        upgradeCost = Bank.upgradeCost;
-        sellingSpeedIncrease = Bank.sellingSpeedIncrease;
+        upgradeIndex = Bank.upgradeIndex;
         progressAmount = Bank.progressAmount;
     }
 }

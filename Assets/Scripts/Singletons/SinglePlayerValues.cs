@@ -10,12 +10,7 @@ public class SinglePlayerValues : MonoBehaviour
   public static float miningSpeedValue = 1;
   public static float lightRadiusValue = 4.5f;
 
-  public static float sellSpeedValue;
   public static float moneyAmount;
-  public static Dictionary<int, int> oresToSell;
-
-  // determines in which scene player left the game
-  public static int sceneIndex = 1;
 
   // static variables
   private static SinglePlayerValues singlePlayerValues;
@@ -37,10 +32,6 @@ public class SinglePlayerValues : MonoBehaviour
     miningSpeedValue = data.miningSpeedValue;
     lightRadiusValue = data.lightRadiusValue;
 
-    sellSpeedValue = data.sellSpeedValue;
-    oresToSell = data.oresToSell;
     moneyAmount = data.moneyAmount;
-
-    sceneIndex = data.sceneIndex;
   }
 }

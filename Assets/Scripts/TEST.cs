@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class TEST : MonoBehaviour
 {
-    [SerializeField] private int moneyAmount = 1000;
-
     [Space] [SerializeField] bool turnLightOn = false;
 
     [Space] [SerializeField] private bool needsToLoadLevel = false;
@@ -15,14 +13,12 @@ public class TEST : MonoBehaviour
     [SerializeField] private GameObject globalLight;
     [SerializeField] private GameObject playersLight;
 
-    DescentToTheNextLevel descentToTheNextLevel;
+    NextLevelLoadController _nextLevelLoadController;
 
     private void Start()
     {
         if (infinityMoney)
             SetInfinityMoney(); 
-        
-        MoneyController.money = moneyAmount;
         
         if (needsToLoadLevel)
             LoadLevel();
@@ -33,12 +29,9 @@ public class TEST : MonoBehaviour
 
     private void LoadLevel()
     {
-        descentToTheNextLevel = FindObjectOfType<DescentToTheNextLevel>();
+        _nextLevelLoadController = FindObjectOfType<NextLevelLoadController>();
 
-        descentToTheNextLevel.needsToLoadNextLevel = true;
-        FindObjectOfType<OreGenerator>().currentLevel = level;
-        descentToTheNextLevel.LoadNextLevel();
-        descentToTheNextLevel.needsToLoadNextLevel = false;
+        _nextLevelLoadController.LoadNextLevel();
     }
 
     private void SwithLight()

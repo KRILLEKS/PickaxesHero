@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea3221fd696bfc4587bef56008c933c, type: 3}
   m_Name: 20_Diamond
   m_EditorClassIdentifier: 
+  index: 19
   armor: 600
   durability: 30000
   sprites:

@@ -6,25 +6,22 @@ using UnityEngine.UI;
 
 public class Bank : MonoBehaviour
 {
-    [SerializeField] private float firstUpgradeCost = 100;
     [SerializeField] private Slider progressSlider;
-    
-    // public variables
-    public static float upgradeCost = 0;
-    
+
     // static variables
-    private static SellingController _sellingController;
-    public static float sellingSpeedIncrease = 2;
-    public static float progressAmount = 0f;
+    public static float progressAmount;
+    private static float upgradeCost;
+    public static int upgradeIndex = 1;
 
     private void Awake()
     {
-        _sellingController = FindObjectOfType<SellingController>();
-        
-        SinglePlayerValues.sellSpeedValue = _sellingController.sellSpeed;
+        if (upgradeIndex == 1)
+        {
+            SetUpgradeValues();
+            upgradeCost = 1; // because it can`t be equal 0
+        }
 
-        if (upgradeCost == 0)
-            upgradeCost = firstUpgradeCost;
+        UpdateSliderValue();
     }
 
     public void AddProgress(float progress)
@@ -34,34 +31,34 @@ public class Bank : MonoBehaviour
         if (progressAmount >= upgradeCost)
         {
             progressAmount -= upgradeCost;
-            
+
             Upgrade();
         }
-        
+
         UpdateSliderValue();
     }
-    
+
     private static void Upgrade()
     {
-        // TODO: make formula
-        upgradeCost += 100;
-
-        _sellingController.sellSpeed += sellingSpeedIncrease;
-        SinglePlayerValues.sellSpeedValue += sellingSpeedIncrease;
-
-        // TODO: make formula
-        sellingSpeedIncrease += 2;
+        upgradeIndex++;
+        SetUpgradeValues();
     }
 
-    public void UpdateSliderValue()
+    private static void SetUpgradeValues()
+    {
+        upgradeCost = Mathf.Pow(upgradeIndex, 3) - Mathf.Pow(upgradeIndex, 2);
+        SellingController.sellSpeed = Mathf.Pow(upgradeIndex, 3) / 10;
+    }
+
+    private void UpdateSliderValue()
     {
         progressSlider.value = progressAmount / upgradeCost;
     }
 
-    public void LoadData(BankData bankData)
+    public static void LoadData(BankData bankData)
     {
-        upgradeCost = bankData.upgradeCost;
-        sellingSpeedIncrease = bankData.sellingSpeedIncrease;
+        upgradeIndex = bankData.upgradeIndex;
+        SetUpgradeValues();
         progressAmount = bankData.progressAmount;
     }
 }

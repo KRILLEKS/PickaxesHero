@@ -7,7 +7,7 @@ public class BonusOresMenu : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
 
-    public void SetTextEqualToCurrentLevel()
+    public void UpdateValue()
     {
         text.text = "Level " + FindObjectOfType<OreGenerator>().currentLevel;
     }

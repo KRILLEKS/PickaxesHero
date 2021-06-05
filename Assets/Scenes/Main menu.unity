@@ -319,7 +319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 9.032}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -473, y: 151}
+  m_AnchoredPosition: {x: -538, y: -3}
   m_SizeDelta: {x: 416.31116, y: 85.460754}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &224571792
@@ -2307,7 +2307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1175567781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2315,12 +2315,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175567780}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f39ac9a1070cd204cb1b6952ce20ce3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyAmount: 1000
   turnLightOn: 0
   needsToLoadLevel: 0
   level: 1
@@ -3001,8 +3000,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 9.973}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -725, y: 403}
-  m_SizeDelta: {x: 954.0292, y: 132.942}
+  m_AnchoredPosition: {x: -795, y: 330}
+  m_SizeDelta: {x: 1196.916, y: 132.942}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1825430078
 MonoBehaviour:
@@ -3138,7 +3137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1960524104
 RectTransform:
   m_ObjectHideFlags: 0

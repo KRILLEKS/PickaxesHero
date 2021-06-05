@@ -18,7 +18,7 @@ public class SellingController : MonoBehaviour
 
     // public variables
     // it determines how much gold u can potentially earn per second
-    public float sellSpeed;
+    public static float sellSpeed = 0.1f;
 
     // private variables
     [HideInInspector]
@@ -41,7 +41,6 @@ public class SellingController : MonoBehaviour
 
     private void Awake()
     {
-        SinglePlayerValues.oresToSell = _oresToSell;
         ores = Constants.GetOres();
         _updateOresInfo = oresMenuContent.GetComponent<UpdateOresInfo>();
         _updateListOresInfo =
@@ -65,6 +64,9 @@ public class SellingController : MonoBehaviour
             if (textValues.Count != Constants.oresAmount)
                 Debug.LogError("ERROR!");
         }
+        
+        if (_oresToSell != null)
+            StartSellCoroutine();
     }
 
     public void StartSellCoroutine()
@@ -148,5 +150,11 @@ public class SellingController : MonoBehaviour
         {
             _updateListOresInfo.SetContentInfo();
         }
+    }
+
+    public static void LoadSellingController(SellingControllerData data)
+    {
+        sellSpeed = data.sellSpeed;
+        _oresToSell = data.oresToSell;
     }
 }

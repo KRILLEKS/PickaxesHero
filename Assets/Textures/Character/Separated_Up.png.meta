@@ -1,31 +1,7 @@
 fileFormatVersion: 2
 guid: 9fd4720bce1779646a59ef88ce1c608f
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -3236285424547204012
-    second: Separated_Up_0
-  - first:
-      213: -3393895074186140747
-    second: Separated_Up_1
-  - first:
-      213: 2970664380629792954
-    second: Separated_Up_2
-  - first:
-      213: 142876454907179128
-    second: Separated_Up_3
-  - first:
-      213: 5443953305211666300
-    second: Separated_Up_4
-  - first:
-      213: -3724226647529192043
-    second: Separated_Up_5
-  - first:
-      213: 3502707073099155742
-    second: Separated_Up_6
-  - first:
-      213: -4915275013080013430
-    second: Separated_Up_7
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -70,7 +46,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 4000
+  spritePixelsToUnits: 8000
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -79,6 +55,8 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -128,12 +106,12 @@ TextureImporter:
       name: Separated_Up_0
       rect:
         serializedVersion: 2
-        x: 1700
-        y: 4917
-        width: 2427
-        height: 2911
-      alignment: 9
-      pivot: {x: 0.49212363, y: 0.09285781}
+        x: 154
+        y: 7935
+        width: 1049
+        height: 2778
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -149,12 +127,12 @@ TextureImporter:
       name: Separated_Up_1
       rect:
         serializedVersion: 2
-        x: 5324
-        y: 5175
-        width: 428
-        height: 583
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 3225
+        y: 6770
+        width: 4265
+        height: 3010
+      alignment: 9
+      pivot: {x: 0.5192055, y: 0.11901523}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -170,12 +148,12 @@ TextureImporter:
       name: Separated_Up_2
       rect:
         serializedVersion: 2
-        x: 6670
-        y: 3044
-        width: 628
-        height: 2885
+        x: 9322
+        y: 9175
+        width: 689
+        height: 591
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -192,11 +170,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2563
-        width: 805
-        height: 1513
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        y: 4238
+        width: 1365
+        height: 1518
+      alignment: 9
+      pivot: {x: 0.74003416, y: 0.73382753}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -212,12 +190,12 @@ TextureImporter:
       name: Separated_Up_4
       rect:
         serializedVersion: 2
-        x: 1881
-        y: 2330
-        width: 2039
-        height: 1742
+        x: 3376
+        y: 3485
+        width: 3570
+        height: 1750
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -233,12 +211,12 @@ TextureImporter:
       name: Separated_Up_5
       rect:
         serializedVersion: 2
-        x: 5010
-        y: 2563
-        width: 810
-        height: 1510
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 8760
+        y: 4238
+        width: 1366
+        height: 1518
+      alignment: 9
+      pivot: {x: 0.23918274, y: 0.779835}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -254,12 +232,12 @@ TextureImporter:
       name: Separated_Up_6
       rect:
         serializedVersion: 2
-        x: 1481
+        x: 2493
         y: 0
-        width: 1021
-        height: 1787
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 1833
+        height: 1816
+      alignment: 9
+      pivot: {x: 0.49999988, y: 0.8207656}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -275,12 +253,12 @@ TextureImporter:
       name: Separated_Up_7
       rect:
         serializedVersion: 2
-        x: 3209
-        y: 19
-        width: 1036
+        x: 6210
+        y: 0
+        width: 1767
         height: 1787
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5084525, y: 0.8008967}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

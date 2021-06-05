@@ -34,7 +34,7 @@ public class SellAndBuyMenusScroller : MonoBehaviour
     private IEnumerator Scroll(int startPoint,
         int endPoint)
     {
-        while (timeElapsed < lerpDuration)
+        while (timeElapsed <= lerpDuration)
         {
             _scrollbar.value = Mathf.Lerp(startPoint,
                 endPoint,

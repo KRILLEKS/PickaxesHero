@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class CsGlobal : MonoBehaviour
 {
+    // TODO: add music
     [HideInInspector] public Vector3 g_mousePosition = new Vector3();
 
     [Space] public UnityEvent onTouch; // Invokes on touch
@@ -21,13 +23,25 @@ public class CsGlobal : MonoBehaviour
 
     void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+        if (IsPointerOverUIObject())
+        {
+            Debug.Log("pointing over UI");
+                    return;
+        }
 
         SetMousePosition();
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonUp("Fire1"))
             onTouch.Invoke();
+
+        bool IsPointerOverUIObject()
+        {
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            return results.Count > 0;
+        }
     }
 
     private void SetMousePosition()

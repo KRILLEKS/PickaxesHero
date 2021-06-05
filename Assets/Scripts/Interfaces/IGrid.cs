@@ -5,7 +5,12 @@ using UnityEngine;
 // it`s like an interface
 public class IGrid : MonoBehaviour
 {
-    public GameObject[,] gridArray; // the array includes a barrier
+    public const int WIDTH = 51; //x
+    public const int HEIGHT = 51; //y
+    public const float CELL_SIZE = 1f;
+    
+    public GameObject[,] gridArray = new GameObject[WIDTH,HEIGHT]; // the array includes a barrier
+    public Vector2Int descentPos = new Vector2Int();
 
     // Get gameObject position by gridArray index
     public Vector3 GetWorldPosition(int x, int y) =>
@@ -67,6 +72,10 @@ public class IGrid : MonoBehaviour
     public void RemoveArrayElement(Vector3 pos)
     {
         Vector3Int index = GetArrayIndex(pos);
+        
+        descentPos.x = index.x;
+        descentPos.y = index.y;
+        
         Destroy(gridArray[index.x, index.y]);
         gridArray[index.x, index.y] = null;
     }

@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
+using System.Linq;
 
 public class OreGenerator : MonoBehaviour
 {
@@ -17,26 +20,29 @@ public class OreGenerator : MonoBehaviour
     private float rand;
     public List<float> randNumbers = new List<float>(); // it needs for loading system
     public int currentLevel = 0; // Tells what level needs to be generated
+    
+    // static variables
+    public static bool levelWasLoaded = false;
 
     private void Awake()
     {
         _gridBehaviour = FindObjectOfType<GridBehavior>();
         player = GameObject.FindGameObjectWithTag("Player");
-        chancesGenerator = GameObject.FindObjectOfType<ChancesGenerator>();
+        chancesGenerator = FindObjectOfType<ChancesGenerator>();
 
         oresPrefabs = Resources.LoadAll<GameObject>("OresPrefabs").ToList();
     }
 
     public void LoadOres(OresData oresData)
     {
+        levelWasLoaded = true;
+        
         currentLevel = oresData.indexer;
         randNumbers = oresData.randNumbers;
 
         DestroyOres();
 
         Debug.Log("Level : " + currentLevel);
-
-        GenerateOres(false);
     }
 
     private void DestroyOres()
@@ -58,15 +64,17 @@ public class OreGenerator : MonoBehaviour
     }
 
     [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
-    private void GenerateOres(bool newOres)
+    public void GenerateOres(bool newOres)
     {
         values = chancesGenerator.GetChance();
-
+        
         if (values.Sum() != 100)
             Debug.LogError("ERROR");
 
         if (newOres) // generate new ores
         {
+            Debug.Log("generate ores");
+
             randNumbers.Clear();
 
             for (int x = 0; x < GridBehavior.WIDTH; x++)
@@ -103,12 +111,22 @@ public class OreGenerator : MonoBehaviour
         }
 
         else // load old ores
+        {
+            Debug.Log("load ores");
+            
             for (int x = 0, i = 0; x < GridBehavior.WIDTH; x++)
                 for (int y = 0; y < GridBehavior.HEIGHT; y++)
-                    if (!_gridBehaviour.gridArray[x, y])
+                    if (_gridBehaviour.gridArray[x, y] == null && 
+                    _gridBehaviour.descentPos != new Vector2(x,y))
                         GenerateOre(x, y, randNumbers[i++]);
                     else
+                    {
                         i++;
+                    }
+
+            NextLevelLoadController.needsToLoadNextLevel = false;
+        }
+
 
         void GenerateOre(int x, int y, float value)
         {

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea3221fd696bfc4587bef56008c933c, type: 3}
   m_Name: 6_Iron
   m_EditorClassIdentifier: 
+  index: 5
   armor: 20
   durability: 450
   sprites:

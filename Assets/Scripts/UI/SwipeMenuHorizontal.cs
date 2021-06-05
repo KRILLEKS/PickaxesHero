@@ -22,11 +22,11 @@ public class SwipeMenuHorizontal : SwipeMenu
 
     private void Start()
     {
-        pos = new float[transform.childCount];
-        distance = 1f / (pos.Length - 1);
+        positions = new float[transform.childCount];
+        distance = 1f / (positions.Length - 1);
 
-        for (int i = 0; i < pos.Length; i++)
-            pos[i] = distance * i; // sets distance value for every object
+        for (int i = 0; i < positions.Length; i++)
+            positions[i] = distance * i; // sets distance value for every object
     }
 
     void Update()
@@ -39,16 +39,16 @@ public class SwipeMenuHorizontal : SwipeMenu
 
         void ChangeElementsSize()
         {
-            for (int i = 0; i < pos.Length; i++)
-                if (pos[i] < scrollbar.value + (distance / 2) &&
-                    pos[i] > scrollbar.value - (distance / 2))
+            for (int i = 0; i < positions.Length; i++)
+                if (positions[i] < scrollbar.value + (distance / 2) &&
+                    positions[i] > scrollbar.value - (distance / 2))
                     IncreaseCentralElementSize(i);
                 else // if u over slide on right or on left without if elements size will decrease same with if second condition
                     DecreaseOtherElementsSize(i);
             
             void DecreaseOtherElementsSize(int index)
             {
-                for (int i = 0; i < pos.Length; i++)
+                for (int i = 0; i < positions.Length; i++)
                     if (index != i)
                         transform.GetChild(i).localScale = Vector2.Lerp(
                             transform.GetChild(i).localScale,

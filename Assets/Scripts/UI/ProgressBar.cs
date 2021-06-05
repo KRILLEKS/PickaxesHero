@@ -4,9 +4,8 @@ using UnityEngine.UI;
 public class ProgressBar : MonoBehaviour
 {
     private Slider slider;
-    private Button button;
     private Image filler;
-    private DescentToTheNextLevel descentToTheNextLevel;
+    private NextLevelLoadController _nextLevelLoadController;
 
     // local variables
     [HideInInspector] public int value = 0;
@@ -15,8 +14,7 @@ public class ProgressBar : MonoBehaviour
     {
         filler = gameObject.GetComponentInChildren<Image>();
         slider = gameObject.GetComponentInChildren<Slider>();
-        descentToTheNextLevel = FindObjectOfType<DescentToTheNextLevel>();
-        button = gameObject.GetComponentInChildren<Button>();
+        _nextLevelLoadController = FindObjectOfType<NextLevelLoadController>();
     }
 
     public void LoadProgressBar(ProgressBarData progressBarData)
@@ -25,13 +23,12 @@ public class ProgressBar : MonoBehaviour
         slider.value = value;
 
         if ((value == slider.maxValue || value > slider.maxValue) &&
-            descentToTheNextLevel.descentWasSpawned)
+            _nextLevelLoadController.descentWasSpawned)
         {
             DisableProgressBar();
-            Reset();
         }
         else if ((value == slider.maxValue || value > slider.maxValue) &&
-                 !descentToTheNextLevel.descentWasSpawned)
+                 !_nextLevelLoadController.descentWasSpawned)
         {
             EnableProgressBar();
             ReachedMaxValue();
@@ -42,7 +39,8 @@ public class ProgressBar : MonoBehaviour
 
     public void IncreaseValue()
     {
-        slider.value = ++value;
+        if (_nextLevelLoadController.descentWasSpawned == false)
+            slider.value = ++value;
 
         if (value == slider.maxValue)
             ReachedMaxValue();
@@ -50,32 +48,36 @@ public class ProgressBar : MonoBehaviour
 
     private void ReachedMaxValue()
     {
-        GenerateNextLevelButton();
         ChangeFillerColour();
-
-        void GenerateNextLevelButton() =>
-            button.enabled = true;
 
         void ChangeFillerColour() =>
             filler.color = Color.green;
     }
 
 #region ProgressBarController
-
+    
+    // TODO: doesn't work properly with save system
     public void DisableProgressBar()
     {
-        gameObject.SetActive(false);
-        button.enabled = false;
+        Reset();
+        filler.gameObject.SetActive(false);
     }
 
-    public void EnableProgressBar() =>
-        gameObject.SetActive(true);
+    public void EnableProgressBar()
+    {
+        filler.gameObject.SetActive(true);
+    }
 
     public void Reset()
     {
         slider.value = 0;
         value = 0;
         filler.color = Color.white;
+    }
+    
+    public bool  ReachedMaxVal()
+    {
+        return slider.maxValue == slider.value;
     }
 
 #endregion

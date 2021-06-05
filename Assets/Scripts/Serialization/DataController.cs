@@ -13,11 +13,11 @@ public class DataController : MonoBehaviour
     private GenerateLevel generateLevel;
     private OreGenerator oreGenerator;
     private GridBehavior _gridBehavior;
-    private DescentToTheNextLevel descentToTheNextLevel;
+    private NextLevelLoadController _nextLevelLoadController;
     private ProgressBar progressBar;
     private SingleExtractedOresCounter extractedOresCounter;
     private ShopMenuController _shopMenuController;
-    private Bank bank;
+    private ChancesGenerator _chancesGenerator;
 
     enum Scenes
     {
@@ -26,7 +26,7 @@ public class DataController : MonoBehaviour
         mine = 2
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         currentScene = (Scenes) SceneManager.GetActiveScene().buildIndex;
 
@@ -34,13 +34,13 @@ public class DataController : MonoBehaviour
         switch (currentScene)
         {
             case Scenes.mainMenu:
-                GlobalAwake();
+                GlobalStart();
                 break;
             case Scenes.city:
-                CityAwake();
+                CityStart();
                 break;
             case Scenes.mine:
-                MineAwake();
+                MineStart();
                 break;
             default:
                 Debug.LogError("ERROR");
@@ -78,14 +78,14 @@ public class DataController : MonoBehaviour
                     MineSave();
                     break;
             }
-            
+
             GlobalSave();
         }
     }
 
 #region Global
 
-    private void GlobalAwake()
+    private void GlobalStart()
     {
         extractedOresCounter = FindObjectOfType<SingleExtractedOresCounter>();
     }
@@ -93,44 +93,52 @@ public class DataController : MonoBehaviour
     private void GlobalSave()
     {
         Debug.Log("Save global");
-        
+
         SaveSystem.Save("extractedOres",
                         new ExtractedOresData(SingleExtractedOresCounter.ores));
 
         SaveSystem.Save("playerValues", new PlayerValuesData());
+
+        SaveSystem.Save("sellingController", new SellingControllerData());
+
+        SaveSystem.Save("gameManager", new GameManagerData());
     }
 
     private void GlobalLoad()
     {
         Debug.Log("Load global");
-        
+
         extractedOresCounter.LoadOres(
             LoadSystem.Load<ExtractedOresData>("extractedOres"));
 
         SinglePlayerValues.LoadData(LoadSystem.Load<PlayerValuesData>
                                         ("playerValues"));
+
+        SellingController.LoadSellingController(
+            LoadSystem.Load<SellingControllerData>("sellingController"));
+
+        GameManager.LoadIndex(LoadSystem.Load<GameManagerData>("gameManager"));
     }
 
 #endregion
 
 #region City
 
-    private void CityAwake()
+    private void CityStart()
     {
         _shopMenuController = FindObjectOfType<ShopMenuController>();
-        bank = FindObjectOfType<Bank>();
     }
 
     public void CitySave()
     {
         if (!autoSaveAndLoad)
             return;
-        
+
         Debug.Log("Save city");
-        
+
         SaveSystem.Save("shopIndexes", new ShopMenuData(_shopMenuController));
         SaveSystem.Save("bank", new BankData());
-        
+
         if (saveGlobalWhenSaveMineOrCity)
             GlobalSave();
     }
@@ -138,60 +146,73 @@ public class DataController : MonoBehaviour
     private void CityLoad()
     {
         Debug.Log("Load city");
-        
+
         _shopMenuController.LoadIndexes(
             LoadSystem.Load<ShopMenuData>("shopIndexes"));
-        bank.LoadData(LoadSystem.Load<BankData>("bank"));
+        Bank.LoadData(LoadSystem.Load<BankData>("bank"));
     }
 
 #endregion
 
 #region Mine
 
-    private void MineAwake()
+    private void MineStart()
     {
         playerGO = GameObject.FindGameObjectWithTag("Player");
         generateLevel = FindObjectOfType<GenerateLevel>();
         _gridBehavior = FindObjectOfType<GridBehavior>();
         oreGenerator = FindObjectOfType<OreGenerator>();
-        descentToTheNextLevel = FindObjectOfType<DescentToTheNextLevel>();
+        _nextLevelLoadController = FindObjectOfType<NextLevelLoadController>();
         progressBar = FindObjectOfType<ProgressBar>();
+        _chancesGenerator = FindObjectOfType<ChancesGenerator>();
     }
 
     public void MineSave()
     {
         Debug.Log("Save mine");
-        
+
         if (!autoSaveAndLoad)
             return;
+
         
+        // TODO: how pros make it (scalable)
         SaveSystem.Save("player", new PlayerPositionData(playerGO));
         SaveSystem.Save("level", new LevelPrefabData(generateLevel.rand));
         SaveSystem.Save("grid", new GridData(_gridBehavior));
         SaveSystem.Save("ores", new OresData(oreGenerator));
-        SaveSystem.Save("descent", new DescentData(descentToTheNextLevel));
+        SaveSystem.Save("descent", new DescentData(_nextLevelLoadController));
         SaveSystem.Save("progressBar", new ProgressBarData(progressBar));
-        
+        SaveSystem.Save("chances", new ChancesData(_chancesGenerator));
+
         if (saveGlobalWhenSaveMineOrCity)
             GlobalSave();
     }
 
     private void MineLoad()
     {
+        if (GameManager.previousSceneIndex != 0) // if we load not from main menu
+            return;
+        
         Debug.Log("Load mine");
+
+        _chancesGenerator.LoadChances(LoadSystem.Load<ChancesData>("chances"));
+        
+        generateLevel.LoadLevelPrefab(LoadSystem.Load<LevelPrefabData>("level")
+                                                .rand);
+
         PlayerPositionData playerPositionData =
             LoadSystem.Load<PlayerPositionData>("player");
-        _gridBehavior.LoadGrid(LoadSystem.Load<GridData>("grid"));
-        oreGenerator.LoadOres(LoadSystem.Load<OresData>("ores"));
         playerGO.transform.position = new Vector3(
             playerPositionData.position[0],
             playerPositionData.position[1],
             playerPositionData.position[2]);
 
-        generateLevel.LoadLevelPrefab(LoadSystem.Load<LevelPrefabData>("level")
-                                                .rand);
+        _gridBehavior.LoadGrid(LoadSystem.Load<GridData>("grid"));
 
-        descentToTheNextLevel.LoadDescent(
+        oreGenerator.LoadOres(LoadSystem.Load<OresData>("ores"));
+
+
+        _nextLevelLoadController.LoadDescent(
             LoadSystem.Load<DescentData>("descent"));
 
         progressBar.LoadProgressBar(
@@ -199,6 +220,4 @@ public class DataController : MonoBehaviour
     }
 
 #endregion
-    
-    // TODO: make reset progress button in utilities 
 }

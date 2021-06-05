@@ -21,12 +21,12 @@ public class SwipeMenuVertical : SwipeMenu
     {
         // -visibleSegments, because we simultaneously have this number
         // like if we have only 6 segments, we can`t scroll anywhere
-        pos = new float [transform.childCount - visibleSegments];
-        distance = 1f / (pos.Length);
+        positions = new float [transform.childCount - visibleSegments];
+        distance = 1f / (positions.Length);
 
-        for (int i = 0; i < pos.Length; i++)
+        for (int i = 0; i < positions.Length; i++)
         {
-            pos[i] = distance * i;
+            positions[i] = distance * i;
         }
     }
 

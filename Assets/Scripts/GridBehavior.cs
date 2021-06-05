@@ -16,17 +16,12 @@ public class GridBehavior : IGrid
     public List<GameObject> g_path;
 
     // constants
-    public const int WIDTH = 51; //x
-    public const int HEIGHT = 51; //y
-    public const float CELL_SIZE = 1f;
     public static readonly Vector3 originPosition = new Vector3(-25, -25);
 
     private void Awake()
     {
         _startX = Mathf.Abs(Vector3Int.FloorToInt(GetWorldPosition(0, 0)).x);
         _startY = Mathf.Abs(Vector3Int.FloorToInt(GetWorldPosition(0, 0)).y);
-
-        gridArray = new GameObject[WIDTH, HEIGHT];
 
         CreateWhiteLines();
     }
@@ -68,6 +63,9 @@ public class GridBehavior : IGrid
             for (int y = 0; y < HEIGHT; y++)
                 if (gridData.gridArray[x, y])
                     InstantiateGridPrefab(x, y);
+
+        descentPos.x = gridData.descentPos[0];
+        descentPos.y = gridData.descentPos[1];
     }
 
     public void ResetGrid()

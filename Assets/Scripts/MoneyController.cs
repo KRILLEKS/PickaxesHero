@@ -13,16 +13,19 @@ public class MoneyController : MonoBehaviour, ISerializationCallbackReceiver
     // static variable
     private static TextMeshProUGUI moneyText;
 
-    private static float _money;
-
     public static float money
     {
-        get { return _money; }
+        get { return SinglePlayerValues.moneyAmount; }
         set
         {
-            _money = value;
+            SinglePlayerValues.moneyAmount = value;
             onValueChange();
         }
+    }
+
+    private void Awake()
+    {
+        onValueChange();
     }
 
     public void OnBeforeSerialize()
@@ -37,6 +40,5 @@ public class MoneyController : MonoBehaviour, ISerializationCallbackReceiver
     private static void onValueChange()
     {
         moneyText.text = money.ToString();
-        SinglePlayerValues.moneyAmount = money;
     }
 }

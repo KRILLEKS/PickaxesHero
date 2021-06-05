@@ -11,13 +11,24 @@ public class UpdateOresInfo : MonoBehaviour
     private TextMeshProUGUI[] _textMeshProUguis = new
         TextMeshProUGUI[Constants.oresAmount];
 
+    private Transform[] childGOs;
+
     private void Awake()
     {
         for (int i = 0; i < Constants.oresAmount; i++)
         {
-            if (gameObject.activeSelf)
-                _textMeshProUguis[i] = gameObject.transform.GetChild(i).Find
-                    ("Amount").gameObject.GetComponent<TextMeshProUGUI>();
+            if (!gameObject.activeSelf)
+                continue;
+            
+            childGOs = gameObject.transform.GetChild(i)
+                                 .GetComponentsInChildren<Transform>();
+            
+            for (int j = 0; j < childGOs.Length; j++)
+            {
+                if (childGOs[j].name == "Amount")
+                    _textMeshProUguis[i] = childGOs[j].gameObject
+                    .GetComponentInChildren<TextMeshProUGUI>();
+            }
         }
     }
 
