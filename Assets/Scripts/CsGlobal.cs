@@ -25,8 +25,7 @@ public class CsGlobal : MonoBehaviour
     {
         if (IsPointerOverUIObject())
         {
-            Debug.Log("pointing over UI");
-                    return;
+            return;
         }
 
         SetMousePosition();
@@ -37,7 +36,8 @@ public class CsGlobal : MonoBehaviour
         bool IsPointerOverUIObject()
         {
             PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            eventDataCurrentPosition.position =
+                new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
             return results.Count > 0;

@@ -26,10 +26,10 @@ public class SingleExtractedOresCounter : MonoBehaviour
         }
     }
 
-    public void GetOre(int index)
+    public void GetOre(int index, int amount = 1)
     {
-        ores[index]++;
-        thisLevelOres[index]++;
+        ores[index] += amount;
+        thisLevelOres[index] += amount;
     }
 
     public static void GetExtraOres()

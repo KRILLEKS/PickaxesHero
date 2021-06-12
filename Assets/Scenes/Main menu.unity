@@ -2302,12 +2302,12 @@ GameObject:
   - component: {fileID: 1175567782}
   - component: {fileID: 1175567781}
   m_Layer: 0
-  m_Name: TEST
+  m_Name: Dev Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1175567781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2320,13 +2320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39ac9a1070cd204cb1b6952ce20ce3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnLightOn: 0
-  needsToLoadLevel: 0
-  level: 1
-  infinityMoney: 1
-  background: {fileID: 0}
-  globalLight: {fileID: 0}
-  playersLight: {fileID: 0}
+  infinityOres: 1
 --- !u!4 &1175567782
 Transform:
   m_ObjectHideFlags: 0

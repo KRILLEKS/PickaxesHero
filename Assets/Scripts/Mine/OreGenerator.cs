@@ -8,6 +8,7 @@ using System.Linq;
 
 public class OreGenerator : MonoBehaviour
 {
+    // TODO: spawning in the void
     // global variables
     private GridBehavior _gridBehaviour;
     private GameObject player;

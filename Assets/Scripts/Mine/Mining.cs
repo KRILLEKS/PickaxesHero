@@ -9,7 +9,7 @@ public class Mining : MonoBehaviour
   // global variables
   private CsGlobal csGlobal;
   private GridBehavior _gridBehavior;
-  private ChracterAnimatorController animatorController;
+  private CharacterAnimatorController animatorController;
 
   // local variables
   private Vector3 blockPosition = new Vector3();
@@ -20,7 +20,7 @@ public class Mining : MonoBehaviour
   {
     csGlobal = FindObjectOfType<CsGlobal>();
     _gridBehavior = FindObjectOfType<GridBehavior>();
-    animatorController = FindObjectOfType<ChracterAnimatorController>();
+    animatorController = FindObjectOfType<CharacterAnimatorController>();
   }
 
   // Invokes on touch and sets block value
@@ -31,10 +31,13 @@ public class Mining : MonoBehaviour
     blockPosition = csGlobal.g_mousePosition;
     Collider2D hitInfo = Physics2D.OverlapPoint(blockPosition);
 
-    if (hitInfo && hitInfo.tag == "Ore" && _gridBehavior.CanAchive(blockPosition))
-      block = hitInfo.GetComponent<OreDurability>();
-    else
-      block = null;
+    if (_gridBehavior.CanAchive(blockPosition))
+    {
+      if (hitInfo && hitInfo.CompareTag("Ore"))
+        block = hitInfo.GetComponent<OreDurability>();
+      else
+        block = null;
+    }
   }
 
   // Invokes on PlayerStop and Start MineCoroutine
@@ -46,7 +49,7 @@ public class Mining : MonoBehaviour
       animatorController.InvertIsMiningVar();
     }
   }
-  public void DamageOre()
+  public void DamageOre() // animator uses it
   {
     if (block)
       block.TakeDamage(damage);

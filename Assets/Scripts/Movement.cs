@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
     private List<GameObject> path = new List<GameObject>();
     private CsGlobal csGlobal;
     private Rigidbody2D rigidBody;
-    private ChracterAnimatorController animatorController;
+    private CharacterAnimatorController animatorController;
 
     //local variables
     private Vector3 movePosition = new Vector3(0, 0, 0);
@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
         _gridBehavior = FindObjectOfType<GridBehavior>();
         csGlobal = FindObjectOfType<CsGlobal>();
         rigidBody = gameObject.GetComponent<Rigidbody2D>();
-        animatorController = FindObjectOfType<ChracterAnimatorController>();
+        animatorController = FindObjectOfType<CharacterAnimatorController>();
 
         if (atStop == null)
             new UnityEvent();

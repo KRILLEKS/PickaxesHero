@@ -11,7 +11,7 @@ public class SetValuesToPlayer : MonoBehaviour
     {
         FindObjectOfType<Mining>().damage = SinglePlayerValues.damageValue;
 
-        FindObjectOfType<ChracterAnimatorController>().SetAnimationsSpeed(
+        FindObjectOfType<CharacterAnimatorController>().SetAnimationsSpeed(
             SinglePlayerValues
                 .miningSpeedValue);
 
