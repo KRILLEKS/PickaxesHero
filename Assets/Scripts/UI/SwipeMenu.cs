@@ -1,25 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public abstract class SwipeMenu : MonoBehaviour
+public class SwipeMenu : SwipeMenuCore
 {
-    [SerializeField] public float transitionLerpTime = 0.01f;
-    [SerializeField] public Scrollbar scrollbar;
+    // global variables
+    private CsGlobal csGlobal;
 
-    // local variables
-    [HideInInspector] public float[] positions;
-    [HideInInspector] public float distance; // distance between objects
-    
-    public void ScrollToNearest()
+    private void Awake()
     {
-        foreach (var position in positions)
-            if (scrollbar.value < position + (distance / 2) &&
-                scrollbar.value > position - (distance / 2))
-                scrollbar.value = Mathf.Lerp(
-                    scrollbar.value,
-                    position,
-                    transitionLerpTime * Time.fixedDeltaTime);
+        csGlobal = FindObjectOfType<CsGlobal>();
+    }
+
+    private void Start()
+    {
+        positions = new float[transform.childCount];
+        distance = 1f / (positions.Length - 1);
+
+        for (int i = 0; i < positions.Length; i++)
+            positions[i] = distance * i; // sets distance value for every object
+    }
+
+    void Update()
+    {
+        if (!csGlobal.isClicking())
+            ScrollToNearest();
+
+        if (changeElementsSize)
+            ChangeElementsSize();
     }
 }

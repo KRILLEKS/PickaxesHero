@@ -9,8 +9,6 @@ public class CityController : MonoBehaviour
 {
     [SerializeField] private GameObject filler;
 
-    // public variables
-    public UnityEvent onDescending;
     public enum buildings
     {
         descent,
@@ -23,9 +21,6 @@ public class CityController : MonoBehaviour
     private GameManager _gameManager;
     private void Awake()
     {
-        if (onDescending == null)
-            new UnityEvent();
-        
         _csGlobal = FindObjectOfType<CsGlobal>();
         _gameManager = FindObjectOfType<GameManager>();
     }
@@ -47,12 +42,12 @@ public class CityController : MonoBehaviour
             switch (_buildingDefinition.building)
             {
                 case buildings.descent:
-                    _gameManager.LoadMine();
-                    onDescending.Invoke();
+                    _buildingDefinition.clickAction.Invoke();
                     break;
                 case buildings.building:
                     _buildingDefinition.menuToOpen.SetActive(true);
                     filler.SetActive(true);
+                    _buildingDefinition.clickAction.Invoke();
                     break;
                 default:
                     Debug.LogError("ERROR");

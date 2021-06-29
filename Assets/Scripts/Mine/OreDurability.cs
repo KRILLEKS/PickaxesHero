@@ -20,7 +20,7 @@ public class OreDurability : MonoBehaviour
     private float armor = 10f;
     private int index;
     private IEnumerable<BoostersController.BoosterTypes> boosterTypes;
-    private Random _random = new Random();
+    private readonly Random _random = new Random();
     private float randVal;
 
     private void Awake()
@@ -56,6 +56,7 @@ public class OreDurability : MonoBehaviour
             extractedOresCounter.GetOre(index, BoostersController.boosters[2].activeSelf ? 2 : 1);
             animatorController.InvertIsMiningVar();
             progressBar.IncreaseValue();
+            ChestSpawnController.Try2SpawnChest(transform.position);
         }
 
         Destroy(gameObject);
@@ -73,12 +74,7 @@ public class OreDurability : MonoBehaviour
 
         if (randVal < BoostersController.chanceOnBooster)
         {
-            Debug.Log("Get boost " + randVal);
             BoostersController.GetBooster(booster);
-        }
-        else
-        {
-            Debug.Log("Don`t get boost " + randVal);
         }
     }
 }

@@ -9,6 +9,8 @@ TagManager:
   - Shop
   - Value
   - Bank
+  - Chest
+  - Hiden
   layers:
   - Default
   - TransparentFX

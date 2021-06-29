@@ -32,20 +32,20 @@ public class BoostersController : MonoBehaviour
 
     private void Update()
     {
-        for (int index = 0; index < boosters.Length; index++)
+        for (var index = 0; index < boosters.Length; index++)
         {
-            if (boostersImage[index])
+            if (!boostersImage[index])
+                continue;
+            
+            if (boostersImage[index].fillAmount > 0)
+                boostersImage[index].fillAmount -= Time.deltaTime / boosterDuration;
+            else
             {
-                if (boostersImage[index].fillAmount > 0)
-                    boostersImage[index].fillAmount -= Time.deltaTime / boosterDuration;
-                else
-                {
-                    boostersImage[index] = null;
-                    boosters[index].SetActive(false);
+                boostersImage[index] = null;
+                boosters[index].SetActive(false);
                     
-                    if (index == (int)BoosterTypes.speed)
-                        _animatorController.DecreaseAnimationSpeed();
-                }
+                if (index == (int)BoosterTypes.speed)
+                    _animatorController.DecreaseAnimationSpeed();
             }
         }
     }

@@ -14,6 +14,8 @@ public class BuyOrSellMenu : MonoBehaviour
     // it`s income or cost
     [SerializeField] private TextMeshProUGUI moneyAmount;
 
+    [SerializeField] private GameObject transactionButton;
+
     // local variables
     private OpenModalMenu _openModalMenu;
     private TMP_InputField inputField;
@@ -66,7 +68,9 @@ public class BuyOrSellMenu : MonoBehaviour
         }
         else
         {
-            //TODO: popup menu "not enough money"
+            InstantiatePopUpTextController.InstantiateText(transactionButton.transform.position,
+                                                           "not enough money",
+                                                           15);
         }
     }
 

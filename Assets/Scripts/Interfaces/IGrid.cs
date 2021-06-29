@@ -32,7 +32,7 @@ public class IGrid : MonoBehaviour
     public bool IsTileExists(int x, int y)
     {
         Collider2D hitInfo = Physics2D.OverlapPoint(GetWorldPosition(x, y) + new Vector3(.5f, .5f));
-        return hitInfo && hitInfo.tag != "Player";
+        return hitInfo && (!hitInfo.CompareTag("Player") && !hitInfo.CompareTag("Chest")); // TODO: maybe remake this 
     }
     
     // Checks can player get to this location or no

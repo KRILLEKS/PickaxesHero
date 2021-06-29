@@ -102,6 +102,8 @@ public class DataController : MonoBehaviour
         SaveSystem.Save("sellingController", new SellingControllerData());
 
         SaveSystem.Save("gameManager", new GameManagerData());
+        
+        SaveSystem.Save("statistics", new StatisticsData());
     }
 
     private void GlobalLoad()
@@ -118,6 +120,8 @@ public class DataController : MonoBehaviour
             LoadSystem.Load<SellingControllerData>("sellingController"));
 
         GameManager.LoadIndex(LoadSystem.Load<GameManagerData>("gameManager"));
+        
+        Statistics.LoadData(LoadSystem.Load<StatisticsData>("statistics"));
     }
 
 #endregion

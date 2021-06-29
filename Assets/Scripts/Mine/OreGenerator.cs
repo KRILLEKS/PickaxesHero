@@ -34,6 +34,15 @@ public class OreGenerator : MonoBehaviour
         oresPrefabs = Resources.LoadAll<GameObject>("OresPrefabs").ToList();
     }
 
+    private void Start()
+    {
+        if (levelWasLoaded == false)
+        {
+            currentLevel = DataForMine.whichLevel2Load;
+            chancesGenerator.GenerateCertainChance(DataForMine.whichLevel2Load);
+        }
+    }
+
     public void LoadOres(OresData oresData)
     {
         levelWasLoaded = true;

@@ -89,6 +89,7 @@ public class NextLevelLoadController : MonoBehaviour
             player.transform.position + new Vector3(1, 0));
 
         descentWasSpawned = true;
+        PointerController.EnablePointer(descent.transform.position);
     }
 
     void DestroyOres()
@@ -168,6 +169,9 @@ public class NextLevelLoadController : MonoBehaviour
 
         bonusOresMenu.UpdateValue();
         progressBar.EnableProgressBar();
+        
+        PointerController.DisablePointer();
+        Statistics.SetMaxLevelReached(oreGenerator.currentLevel);
     }
 
 #endregion

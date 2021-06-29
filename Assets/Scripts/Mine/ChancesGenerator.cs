@@ -29,7 +29,7 @@ public class ChancesGenerator : MonoBehaviour
 
     // local variables
     public float[] currentLevelChances = new float[Constants.oresAmount];
-    public float[] previousLevelChances = new float[Constants.oresAmount];
+    public float[] previousLevelChances = new float[Constants.oresAmount]; // for data save
     private int lastOresIndex = 0; // it needs for last ores generation part  
 
     private readonly int[] fillersIndexes =
@@ -40,7 +40,7 @@ public class ChancesGenerator : MonoBehaviour
 
     int tailIndex = 0; //use in Delete tails method
 
-    void Start()
+    void Awake()
     {
         FillDictionaries();
         SeparateOres();
@@ -298,8 +298,22 @@ public class ChancesGenerator : MonoBehaviour
 
 #endregion
 
+    public float[] GenerateCertainChance(int level)
+    {
+        for (var i = 0; i < level - 1; i++)
+        {
+            GetChance();
+            Debug.Log(currentLevelChances[0]);
+        }
+
+        return currentLevelChances;
+    }
+    
+    
     public float[] GetChance()
     {
+        Debug.Log("Get chance");
+        
         previousLevelChances = (float[])currentLevelChances.Clone();
 
         // TODO: how to make it scalable

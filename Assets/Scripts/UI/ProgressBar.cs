@@ -5,6 +5,7 @@ public class ProgressBar : MonoBehaviour
 {
     private Slider slider;
     private Image filler;
+    private RawImage border;
     private NextLevelLoadController _nextLevelLoadController;
 
     // local variables
@@ -12,6 +13,7 @@ public class ProgressBar : MonoBehaviour
 
     private void Awake()
     {
+        border = gameObject.GetComponentInChildren<RawImage>();
         filler = gameObject.GetComponentInChildren<Image>();
         slider = gameObject.GetComponentInChildren<Slider>();
         _nextLevelLoadController = FindObjectOfType<NextLevelLoadController>();
@@ -50,28 +52,33 @@ public class ProgressBar : MonoBehaviour
     {
         ChangeFillerColour();
 
-        void ChangeFillerColour() =>
+        void ChangeFillerColour()
+        {
             filler.color = Color.green;
+        }
     }
 
 #region ProgressBarController
     
-    // TODO: doesn't work properly with save system
     public void DisableProgressBar()
     {
         Reset();
+
         filler.gameObject.SetActive(false);
+        border.gameObject.SetActive(false);
     }
 
     public void EnableProgressBar()
     {
         filler.gameObject.SetActive(true);
+        border.gameObject.SetActive(true);
     }
 
     public void Reset()
     {
         slider.value = 0;
         value = 0;
+
         filler.color = Color.white;
     }
     
