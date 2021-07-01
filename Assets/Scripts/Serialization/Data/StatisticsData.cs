@@ -7,9 +7,11 @@ using UnityEngine;
 public class StatisticsData
 {
     public int maxLevelReached;
+    public bool[] minedOres;
 
     public StatisticsData()
     {
         maxLevelReached = Statistics.maxLevelReached;
+        minedOres = Statistics.minedOres;
     }
 }

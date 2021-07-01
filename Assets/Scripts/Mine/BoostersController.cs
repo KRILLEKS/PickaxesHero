@@ -8,8 +8,8 @@ public class BoostersController : MonoBehaviour
     [SerializeField] private GameObject[] boostersSerialization;
 
     // static variables
-    public static float chanceOnBooster = 20f;
-    private static float boosterDuration = 15f; // seconds
+    public static float chanceOnBooster = 2f;
+    private static float boosterDuration = 60f; // seconds
     public static GameObject[] boosters;
     private static Image[] boostersImage;
     private static CharacterAnimatorController _animatorController;

@@ -69,6 +69,8 @@ public class NextLevelLoadController : MonoBehaviour
 
     public void SpawnDescent()
     {
+        Debug.Log("Spawn descent");
+        
         if (progressBar.ReachedMaxVal())
             progressBar.DisableProgressBar();
         else

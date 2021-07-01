@@ -10,7 +10,7 @@ TagManager:
   - Value
   - Bank
   - Chest
-  - Hiden
+  - Hidden
   layers:
   - Default
   - TransparentFX

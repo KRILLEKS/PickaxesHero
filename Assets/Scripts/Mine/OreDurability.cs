@@ -57,6 +57,11 @@ public class OreDurability : MonoBehaviour
             animatorController.InvertIsMiningVar();
             progressBar.IncreaseValue();
             ChestSpawnController.Try2SpawnChest(transform.position);
+
+            if (Statistics.minedOres[index] == false)
+            {
+                Statistics.GetNewMinedOre(index);
+            }
         }
 
         Destroy(gameObject);

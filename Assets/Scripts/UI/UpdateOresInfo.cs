@@ -21,13 +21,13 @@ public class UpdateOresInfo : MonoBehaviour
                 continue;
             
             childGOs = gameObject.transform.GetChild(i)
-                                 .GetComponentsInChildren<Transform>();
+                                 .GetComponentsInChildren<Transform>(true);
             
             for (int j = 0; j < childGOs.Length; j++)
             {
                 if (childGOs[j].name == "Amount")
                     _textMeshProUguis[i] = childGOs[j].gameObject
-                    .GetComponentInChildren<TextMeshProUGUI>();
+                    .GetComponentInChildren<TextMeshProUGUI>(true);
             }
         }
     }
@@ -60,5 +60,9 @@ public class UpdateOresInfo : MonoBehaviour
             if (textMeshProUGUI[i] != null)
                 textMeshProUGUI[i].text =
                     values[i].ToString();
+            else
+            {
+                Debug.LogError("OreInfo equals NULL");
+            }
     }
 }

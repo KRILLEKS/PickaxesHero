@@ -276,8 +276,6 @@ public class GridBehavior : IGrid
             // Calculate path to the block to be extracted or writes that it is impossible to achive desired location
             void PathToExtractedBlock()
             {
-                Debug.Log("path to extracted block");
-                
                 // up, so block at the bottom
                 if (gridArray[_endX, _endY + 1] &&
                     gridArray[_endX, _endY + 1].GetComponent<GridStat>()

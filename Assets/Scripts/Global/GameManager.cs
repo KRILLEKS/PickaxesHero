@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject loadingScreen;
+    
     // static variables
     private static GameManager _gameManager;
 
@@ -40,14 +42,21 @@ public class GameManager : MonoBehaviour
 
     public void LoadCity()
     {
+        loadingScreen.SetActive(true);
+        
+        if (GetSceneIndex() == 2)
+            PointerController.DisablePointer();
+        
         previousSceneIndex = GetSceneIndex();
-        SceneManager.LoadScene("City");
+        SceneManager.LoadSceneAsync("City");
     }
 
     public void LoadMine()
     {
+        loadingScreen.SetActive(true);
+        
         previousSceneIndex = GetSceneIndex();
-        SceneManager.LoadScene("Mine");
+        SceneManager.LoadSceneAsync("Mine");
     }
 
     public static int GetSceneIndex()
