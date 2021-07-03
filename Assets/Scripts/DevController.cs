@@ -3,22 +3,21 @@ using UnityEngine;
 
 public class DevController : MonoBehaviour
 {
+    [SerializeField] private bool turnItOn = false;
     [SerializeField] private bool infinityOres = true;
-//    [SerializeField] private bool loadLevel = true;
-//    [SerializeField] private int levelIndex = 1;
+    [SerializeField] private bool decreaseOres2NextLevel;
     
-    #if UNITY_EDITOR
     private void Start()
     {
+        if (turnItOn == false)
+            return;
+        
+        if (decreaseOres2NextLevel)
+            Ores2NextLevel();
+        
         if (infinityOres)
             SetInfinityOres();
-//        if (loadLevel || GameManager.GetSceneIndex() == 2)
-//        {
-//            Debug.Log("Set level");
-//            LoadLevel();
-//        }
     }
-    #endif
 
     private void SetInfinityOres()
     {
@@ -28,9 +27,8 @@ public class DevController : MonoBehaviour
                 => ore = 10000).ToArray();
     }
 
-//    private void LoadLevel()
-//    {
-//        OreGenerator.currentLevel = levelIndex;
-//        FindObjectOfType<NextLevelLoadController>().LoadNextLevel();
-//    }
+    private void Ores2NextLevel()
+    {
+        FindObjectOfType<ProgressBar>().slider.maxValue = 2; // can be changed
+    }
 }

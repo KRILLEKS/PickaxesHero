@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
 {
-    private Slider slider;
+    public Slider slider; // public only for dev controller
     private Image filler;
     private RawImage border;
     private NextLevelLoadController _nextLevelLoadController;
@@ -24,13 +24,14 @@ public class ProgressBar : MonoBehaviour
         value = progressBarData.value;
         slider.value = value;
 
-        if ((value == slider.maxValue || value > slider.maxValue) &&
-            _nextLevelLoadController.descentWasSpawned)
+        Debug.Log("Load progress bar" + " val: " + value);
+
+        if (_nextLevelLoadController.descentWasSpawned)
         {
             DisableProgressBar();
         }
-        else if ((value == slider.maxValue || value > slider.maxValue) &&
-                 !_nextLevelLoadController.descentWasSpawned)
+        else if (value >= slider.maxValue &&
+                 _nextLevelLoadController.descentWasSpawned == false)
         {
             EnableProgressBar();
             ReachedMaxValue();
@@ -44,7 +45,7 @@ public class ProgressBar : MonoBehaviour
         if (_nextLevelLoadController.descentWasSpawned == false)
             slider.value = ++value;
 
-        if (value == slider.maxValue)
+        if (value >= slider.maxValue)
             ReachedMaxValue();
     }
 
@@ -59,7 +60,7 @@ public class ProgressBar : MonoBehaviour
     }
 
 #region ProgressBarController
-    
+
     public void DisableProgressBar()
     {
         Reset();
@@ -81,10 +82,10 @@ public class ProgressBar : MonoBehaviour
 
         filler.color = Color.white;
     }
-    
-    public bool  ReachedMaxVal()
+
+    public bool ReachedMaxVal()
     {
-        return slider.maxValue == slider.value;
+        return slider.maxValue >= slider.value;
     }
 
 #endregion

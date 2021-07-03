@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TreeEditor;
 using UnityEngine;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 public class OreDurability : MonoBehaviour
 {
@@ -20,7 +20,6 @@ public class OreDurability : MonoBehaviour
     private float armor = 10f;
     private int index;
     private IEnumerable<BoostersController.BoosterTypes> boosterTypes;
-    private readonly Random _random = new Random();
     private float randVal;
 
     private void Awake()
@@ -62,20 +61,20 @@ public class OreDurability : MonoBehaviour
             {
                 Statistics.GetNewMinedOre(index);
             }
+            
+            foreach (var type in boosterTypes)
+            {
+                ChanceToGetBooster(type);
+            }
         }
 
         Destroy(gameObject);
         _gridBehavior.InstantiateNewGridPrefab(transform.position);
-
-        foreach (var type in boosterTypes)
-        {
-            ChanceToGetBooster(type);
-        }
     }
 
     private void ChanceToGetBooster(BoostersController.BoosterTypes booster)
     {
-        randVal = (float) (_random.NextDouble() * 100);
+        randVal = Random.value * 100;
 
         if (randVal < BoostersController.chanceOnBooster)
         {

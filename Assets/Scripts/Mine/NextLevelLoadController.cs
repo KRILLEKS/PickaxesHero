@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class NextLevelLoadController : MonoBehaviour
@@ -17,23 +18,34 @@ public class NextLevelLoadController : MonoBehaviour
     [HideInInspector] public OreGenerator oreGenerator;
     [HideInInspector] public GenerateLevel generateLevel;
     [HideInInspector] public ProgressBar progressBar;
-    private GameObject player;
-    private CsGlobal csGlobal;
+    private GameObject _player;
+    private CsGlobal _csGlobal;
+    private Canvas _canvas;
+    private GameObject _transitionSceneController;
+    private Animator _transitionSceneAnimator;
+    private int _transitionScenesAmount;
+    private bool _firstLevel = false;
 
     // static variables
     public static bool needsToLoadNextLevel = true;
+    private static readonly int Index = Animator.StringToHash("Index");
 
     private void Awake()
     {
         if (onDescending == null)
             new UnityEvent();
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
         _gridBehavior = FindObjectOfType<GridBehavior>();
-        csGlobal = FindObjectOfType<CsGlobal>();
+        _csGlobal = FindObjectOfType<CsGlobal>();
         oreGenerator = FindObjectOfType<OreGenerator>();
         generateLevel = FindObjectOfType<GenerateLevel>();
         progressBar = FindObjectOfType<ProgressBar>();
+        _canvas = FindObjectOfType<Canvas>();
+        _transitionSceneController = Resources.Load<GameObject>("TransitionScene");
+        _transitionSceneAnimator = _transitionSceneController.GetComponent<Animator>();
+        _transitionScenesAmount =
+            _transitionSceneAnimator.runtimeAnimatorController.animationClips.Length;
     }
 
     private void Start()
@@ -41,6 +53,7 @@ public class NextLevelLoadController : MonoBehaviour
         if ((needsToLoadNextLevel && OreGenerator.levelWasLoaded == false) ||
             GameManager.previousSceneIndex == 1)
         {
+            _firstLevel = true;
             LoadNextLevel();
         }
         else
@@ -70,7 +83,7 @@ public class NextLevelLoadController : MonoBehaviour
     public void SpawnDescent()
     {
         Debug.Log("Spawn descent");
-        
+
         if (progressBar.ReachedMaxVal())
             progressBar.DisableProgressBar();
         else
@@ -83,12 +96,12 @@ public class NextLevelLoadController : MonoBehaviour
 
         // TODO: Spawn a descent based on player`s rotation
         descent = Instantiate(descentPrefab,
-                              Vector3Int.FloorToInt(player.transform.position) +
+                              Vector3Int.FloorToInt(_player.transform.position) +
                               new Vector3(.5f, .5f) +
                               new Vector3(1, 0),
                               Quaternion.identity);
         _gridBehavior.RemoveArrayElement(
-            player.transform.position + new Vector3(1, 0));
+            _player.transform.position + new Vector3(1, 0));
 
         descentWasSpawned = true;
         PointerController.EnablePointer(descent.transform.position);
@@ -111,7 +124,7 @@ public class NextLevelLoadController : MonoBehaviour
     {
         Vector3 offset = new Vector3(x, y);
         Collider2D hitInfo =
-            Physics2D.OverlapPoint(player.transform.position + offset);
+            Physics2D.OverlapPoint(_player.transform.position + offset);
 
         if (hitInfo && hitInfo.tag == "Ore")
             hitInfo.GetComponent<OreDurability>().DestroyOre(false);
@@ -127,7 +140,7 @@ public class NextLevelLoadController : MonoBehaviour
         if (descentWasSpawned)
         {
             Collider2D hitInfo =
-                Physics2D.OverlapPoint(csGlobal.g_mousePosition);
+                Physics2D.OverlapPoint(_csGlobal.g_mousePosition);
             if (hitInfo && hitInfo.CompareTag("Descent"))
                 needsToLoadNextLevel = true;
             else
@@ -153,27 +166,39 @@ public class NextLevelLoadController : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        Debug.Log("Load next level");
+        if (_firstLevel == false)
+        {
+            _transitionSceneAnimator.SetInteger(Index, Random.Range(0,_transitionScenesAmount));
+            Instantiate(_transitionSceneController, _canvas.transform);
+        }
 
-        onDescending.Invoke();
-        // TODO: there should be a transition scene
-        Destroy(descent);
-        descentWasSpawned = false;
-        needsToLoadNextLevel = false;
-        nextLevelMenu.SetActive(false);
+        _firstLevel = false;
 
-        generateLevel.GenerateRandomLevelPrefab();
-
-        oreGenerator.GenerateNextLevelOres();
-
-        _gridBehavior.ResetGrid();
-        _gridBehavior.GenerateGrid();
-
-        bonusOresMenu.UpdateValue();
-        progressBar.EnableProgressBar();
+        StartCoroutine(loadCoroutine());
         
-        PointerController.DisablePointer();
-        Statistics.SetMaxLevelReached(oreGenerator.currentLevel);
+        IEnumerator loadCoroutine()
+        {
+            yield return new WaitForSeconds(0.01f);
+            
+            onDescending.Invoke();
+            Destroy(descent);
+            descentWasSpawned = false;
+            needsToLoadNextLevel = false;
+            nextLevelMenu.SetActive(false);
+
+            generateLevel.GenerateRandomLevelPrefab();
+
+            oreGenerator.GenerateNextLevelOres();
+
+            _gridBehavior.ResetGrid();
+            _gridBehavior.GenerateGrid();
+
+            bonusOresMenu.UpdateValue();
+            progressBar.EnableProgressBar();
+
+            PointerController.DisablePointer();
+            Statistics.SetMaxLevelReached(oreGenerator.currentLevel);
+        }
     }
 
 #endregion
