@@ -85,7 +85,7 @@ public class ProgressBar : MonoBehaviour
 
     public bool ReachedMaxVal()
     {
-        return slider.maxValue >= slider.value;
+        return slider.value >= slider.maxValue;
     }
 
 #endregion

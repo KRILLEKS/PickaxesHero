@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuyOrSellMenu : MonoBehaviour
 {
@@ -17,51 +18,56 @@ public class BuyOrSellMenu : MonoBehaviour
     [SerializeField] private GameObject transactionButton;
 
     // local variables
-    private OpenModalMenu _openModalMenu;
-    private TMP_InputField inputField;
-    private Ore ore;
-    private int oreAmount;
-    private float totalMoney;
+    private OpenModalMenu _allInfo;
+    private TMP_InputField _inputField;
+    private Ore _ore;
+    private int _oreAmount;
+    private float _totalMoney;
     private SellingController _sellingController;
+    private Slider _slider;
 
     private void Awake()
     {
-        inputField = transform.GetComponentInChildren<TMP_InputField>();
+        _inputField = transform.GetComponentInChildren<TMP_InputField>();
         _sellingController = FindObjectOfType<SellingController>();
+        _slider = transform.GetComponentInChildren<Slider>();
     }
 
     public void SetUp(OpenModalMenu openModalMenu)
     {
-        _openModalMenu = openModalMenu;
-        ore = _openModalMenu.ore;
+        _allInfo = openModalMenu;
+        _ore = _allInfo.ore;
 
-        switch (_openModalMenu._buyOrSell)
+        switch (_allInfo._buyOrSell)
         {
             case OpenModalMenu.BuyOrSell.Buy:
-                whatOre.text = "Buy " + ore.name;
+                whatOre.text = "Buy " + _ore.name;
+                _slider.maxValue = (float)(Math.Floor(MoneyController.money / _allInfo.ore.buyPrice));
                 break;
 
             case OpenModalMenu.BuyOrSell.Sell:
-                whatOre.text = "Sell " + ore.name;
+                whatOre.text = "Sell " + _ore.name;
+                _slider.maxValue = SingleExtractedOresCounter.ores[_ore.index];
                 break;
         }
 
-        inputField.text = "0";
+        _inputField.text = "0";
+        _slider.value = 0;
     }
 
     public void BuyButton()
     {
         // buy
-        if (MoneyController.money >= totalMoney)
+        if (MoneyController.money >= _totalMoney)
         {
-            MoneyController.money -= totalMoney;
-            SingleExtractedOresCounter.ores[ore.index] += oreAmount;
+            MoneyController.money -= _totalMoney;
+            SingleExtractedOresCounter.ores[_ore.index] += _oreAmount;
 
             // we will also remove ore that we bought from selling
-            if (SellingController._oresToSell.ContainsKey(ore.index))
+            if (SellingController._oresToSell.ContainsKey(_ore.index))
             {
-                SellingController._oresToSell.Remove(ore.index);
-                _sellingController.textValues[ore.index].text = "0";
+                SellingController._oresToSell.Remove(_ore.index);
+                _sellingController.textValues[_ore.index].text = "0";
             }
 
             gameObject.SetActive(false);
@@ -71,21 +77,22 @@ public class BuyOrSellMenu : MonoBehaviour
             InstantiatePopUpTextController.InstantiateText(transactionButton.transform.position,
                                                            "not enough money",
                                                            15);
+            // TODO: work on it
         }
     }
 
     public void SellButton()
     {
         // Set amount to sell
-        _openModalMenu.textMeshProUGUI.text = oreAmount.ToString();
+        _allInfo.textMeshProUGUI.text = _oreAmount.ToString();
 
-        if (oreAmount <= 0)
-            SellingController._oresToSell.Remove(ore.index);
-        else if (SellingController._oresToSell.ContainsKey(ore.index))
-            SellingController._oresToSell[ore.index] = oreAmount;
+        if (_oreAmount <= 0)
+            SellingController._oresToSell.Remove(_ore.index);
+        else if (SellingController._oresToSell.ContainsKey(_ore.index))
+            SellingController._oresToSell[_ore.index] = _oreAmount;
         else
         {
-            SellingController._oresToSell.Add(ore.index, oreAmount);
+            SellingController._oresToSell.Add(_ore.index, _oreAmount);
             SellingController._oresToSell.OrderBy(valuePair => valuePair.Key);
             _sellingController.StartSellCoroutine();
         }
@@ -95,20 +102,31 @@ public class BuyOrSellMenu : MonoBehaviour
 
     public void SetCost()
     {
-        oreAmount = int.Parse(inputField.text);
+        _oreAmount = int.Parse(_inputField.text);
+        if (_oreAmount > _slider.maxValue)
+        {
+            _oreAmount = Mathf.FloorToInt(_slider.maxValue);
+            _inputField.text = _oreAmount.ToString();
+        }
 
-        switch (_openModalMenu._buyOrSell)
+        switch (_allInfo._buyOrSell)
         {
             case OpenModalMenu.BuyOrSell.Buy:
-                totalMoney = oreAmount * ore.buyPrice;
+                _totalMoney = _oreAmount * _ore.buyPrice;
                 break;
             case OpenModalMenu.BuyOrSell.Sell:
-                totalMoney = oreAmount * ore.sellPrice;
+                _totalMoney = _oreAmount * _ore.sellPrice;
                 break;
         }
 
         Regex regex = new Regex(@"\d+");
         moneyAmount.text =
-            regex.Replace(moneyAmount.text, totalMoney.ToString(), 1);
+            regex.Replace(moneyAmount.text, _totalMoney.ToString(), 1);
+    }
+
+    public void OnSliderValueChange()
+    {
+        _inputField.text = _slider.value.ToString();
+        SetCost();
     }
 }

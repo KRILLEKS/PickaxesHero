@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ClosePanels : MonoBehaviour
 {
@@ -6,6 +7,13 @@ public class ClosePanels : MonoBehaviour
 
     public void ClosePanel()
     {
+        StartCoroutine(ClosePanelsWithDelay());
+    }
+
+    private IEnumerator ClosePanelsWithDelay()
+    {
+        yield return new WaitForSeconds(0.02f);
+        
         foreach (var panel in panelsToClose)
         {
             if (panel.activeSelf)

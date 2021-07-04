@@ -23,15 +23,19 @@ public class CsGlobal : MonoBehaviour
 
     void Update()
     {
-        if (IsPointerOverUIObject())
-        {
-            return;
-        }
-
         SetMousePosition();
 
         if (Input.GetButtonUp("Fire1"))
+        {
+            if (IsPointerOverUIObject())
+            {
+                Debug.Log("Deny click");
+                return;
+            }
+            
+            Debug.Log("Touch");
             onTouch.Invoke();
+        }
 
         bool IsPointerOverUIObject()
         {

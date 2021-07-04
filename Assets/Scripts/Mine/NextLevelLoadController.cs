@@ -82,7 +82,6 @@ public class NextLevelLoadController : MonoBehaviour
 
     public void SpawnDescent()
     {
-        Debug.Log("Spawn descent");
 
         if (progressBar.ReachedMaxVal())
             progressBar.DisableProgressBar();
@@ -91,6 +90,8 @@ public class NextLevelLoadController : MonoBehaviour
             //TODO: popup "not enough progress"
             return;
         }
+
+        Debug.Log("Spawn descent");
 
         DestroyOres();
 

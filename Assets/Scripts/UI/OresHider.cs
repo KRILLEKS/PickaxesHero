@@ -15,7 +15,7 @@ public class OresHider : MonoBehaviour
     private void Awake()
     {
         elementsInChild =
-            content.transform.GetChild(0).GetComponentsInChildren<Transform>().Length - 1;
+            content.transform.GetChild(0).childCount;
         allElements = new Transform[Constants.oresAmount, elementsInChild];
 
         for (int oreGO = 0; oreGO < Constants.oresAmount; oreGO++)

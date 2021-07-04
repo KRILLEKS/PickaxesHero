@@ -17,8 +17,7 @@ public class ChancesGenerator : MonoBehaviour
     [SerializeField] float desctroyTailPercentage = 2.5f;
     [SerializeField] float tailDecreasePercentage = 2.5f;
 
-    [SerializeField]
-    float lastOresValue = 0.1f; // it needs for last ores generation part
+    [SerializeField] float lastOresValue = 0.1f; // it needs for last ores generation part
 
     // private variables
     private readonly Dictionary<float, float> oresChanceChanges =
@@ -308,13 +307,13 @@ public class ChancesGenerator : MonoBehaviour
 
         return currentLevelChances;
     }
-    
-    
+
+
     public float[] GetChance()
     {
         Debug.Log("Get chance");
-        
-        previousLevelChances = (float[])currentLevelChances.Clone();
+
+        previousLevelChances = (float[]) currentLevelChances.Clone();
 
         // TODO: how to make it scalable
         if (GenerateFirstChances())
