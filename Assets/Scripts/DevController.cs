@@ -22,6 +22,11 @@ public class DevController : MonoBehaviour
     private void SetInfinityOres()
     {
         Debug.Log(" Infinity money");
+
+        for (var ore = 0; ore < Constants.oresAmount; ore++)
+        {
+            Statistics.minedOres[ore] = true;
+        }
         SingleExtractedOresCounter.ores = SingleExtractedOresCounter.ores
             .Select(ore
                 => ore = 10000).ToArray();

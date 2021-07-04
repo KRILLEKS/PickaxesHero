@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DepositModal : MonoBehaviour
 {
@@ -14,13 +15,15 @@ public class DepositModal : MonoBehaviour
     private Ore _ore;
     private int _fillerIndex;
     private TMP_InputField _inputField;
-    private int amountToDeposit;
-    private float progressToAdd;
+    private int _amountToDeposit;
+    private float _progressToAdd;
+    private Slider _slider;
 
     private void Awake()
     {
         _bank = FindObjectOfType<Bank>();
         _inputField = gameObject.GetComponentInChildren<TMP_InputField>();
+        _slider = GetComponentInChildren<Slider>();
     }
 
     public void SetUp(Ore ore, int fillerIndex)
@@ -28,22 +31,21 @@ public class DepositModal : MonoBehaviour
         _ore = ore;
         _fillerIndex = fillerIndex;
         oreName.text = _ore.name;
+        _slider.maxValue = SingleExtractedOresCounter.ores[_ore.index];
         _inputField.text = "0";
     }
 
     public void DepositButton()
     {
-        amountToDeposit = int.Parse(_inputField.text);
-
-        if (SingleExtractedOresCounter.ores[_ore.index] >= amountToDeposit)
+        if (SingleExtractedOresCounter.ores[_ore.index] >= _amountToDeposit)
         {
             // transaction
-            SingleExtractedOresCounter.ores[_ore.index] -= amountToDeposit;
+            SingleExtractedOresCounter.ores[_ore.index] -= _amountToDeposit;
             
-            progressToAdd =
-                progressReceivedPerOre[_fillerIndex] * amountToDeposit;
+            _progressToAdd =
+                progressReceivedPerOre[_fillerIndex] * _amountToDeposit;
 
-            _bank.AddProgress(progressToAdd);
+            _bank.AddProgress(_progressToAdd);
             
             // close menu
             bankMenuGO.SetActive(true);
@@ -53,5 +55,28 @@ public class DepositModal : MonoBehaviour
         {
             // TODO: popup menu "not enough resources"
         }
+    }
+
+    public void OnSliderValueChange()
+    {
+        _inputField.text = _slider.value.ToString();
+    }
+
+    public void OnInputFieldValueChange()
+    {
+        if (_inputField.text.Length == 0)
+        {
+            _inputField.text = "0";
+            _inputField.MoveTextEnd(false);
+        }
+        else
+        {
+            _amountToDeposit = int.Parse(_inputField.text);
+            if (_amountToDeposit > _slider.maxValue)
+                _amountToDeposit = Mathf.FloorToInt(_slider.maxValue);
+        }
+
+        _inputField.text = _amountToDeposit.ToString();
+        _slider.value = _amountToDeposit;
     }
 }

@@ -102,12 +102,22 @@ public class BuyOrSellMenu : MonoBehaviour
 
     public void SetCost()
     {
-        _oreAmount = int.Parse(_inputField.text);
-        if (_oreAmount > _slider.maxValue)
+        if (_inputField.text.Length == 0)
         {
-            _oreAmount = Mathf.FloorToInt(_slider.maxValue);
-            _inputField.text = _oreAmount.ToString();
+            _inputField.text = "0";
+            _inputField.MoveTextEnd(false);
         }
+        else
+        {
+            _oreAmount = int.Parse(_inputField.text);
+            if (_oreAmount > _slider.maxValue)
+            {
+                _oreAmount = Mathf.FloorToInt(_slider.maxValue);
+                _inputField.text = _oreAmount.ToString();
+            }
+        }
+
+        _slider.value = _oreAmount;
 
         switch (_allInfo._buyOrSell)
         {

@@ -27,8 +27,8 @@ public class Bank : MonoBehaviour
     public void AddProgress(float progress)
     {
         progressAmount += progress;
-
-        if (progressAmount >= upgradeCost)
+        
+        while (progressAmount >= upgradeCost)
         {
             progressAmount -= upgradeCost;
 
